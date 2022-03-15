@@ -9,3 +9,9 @@ prune:
 data_sources:
   - type: filesystem
     encoding: utf-8
+
+deploy:
+  public:
+    kind: rsync
+    options: [ '-aP', '--delete-after' ]
+    dst: "edv38-usk@urbansketchers.de:/home/pacs/edv38/users/usk/doms/urbansketchers.de/htdocs-ssl"
