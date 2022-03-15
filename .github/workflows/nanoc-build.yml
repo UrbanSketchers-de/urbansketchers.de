@@ -1,9 +1,7 @@
-name: Build Site with Nanoc
+name: Build and Deploy Site with Nanoc
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
     branches: [ main ]
 
 jobs:
