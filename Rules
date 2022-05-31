@@ -1,5 +1,16 @@
 #!/usr/bin/env ruby
 
+BYPASS_FILES = %w(404.html crossdomain.xml humans.txt robots.txt googlebd82924855df6b5d.html) unless defined?(BYPASS_FILES)
+
+BYPASS_FILES.each do |file|
+  passthrough "/#{file}"
+end
+
+compile '/htaccess.*' do
+  filter :erb
+  write '/.htaccess'
+end
+
 compile '/**/*.html' do
   layout '/default.*'
 
