@@ -11,7 +11,7 @@ data_sources:
     encoding: utf-8
 
 deploy:
-  public:
+  default:
     kind: rsync
     options: [ '-aP', '--delete-after' ]
     dst: "edv38-usk@urbansketchers.de:/home/pacs/edv38/users/usk/doms/urbansketchers.de/htdocs-ssl"
