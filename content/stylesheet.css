@@ -34,7 +34,8 @@ hr { margin: 1.4rem 0; border-width: 0.1rem; }
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas:   "content"
-                         "sidebar";
+                         "sidebar"
+                         "footer";
   gap: 1em;
 }
 
@@ -47,7 +48,8 @@ hr { margin: 1.4rem 0; border-width: 0.1rem; }
     margin: 0 auto;
     max-width: 50em;
     grid-template-columns: 3fr       1fr;
-    grid-template-areas:   "content  sidebar";
+    grid-template-areas:   "content  sidebar"
+                           "footer   footer";
   }
 }
 
@@ -100,4 +102,11 @@ hr { margin: 1.4rem 0; border-width: 0.1rem; }
 #sidebar li {
   font-size: 0.8rem;
   line-height: 1.4rem;
+}
+
+#footer {
+  grid-area: footer;
+  border-top: 0.1rem solid #ddd;
+  padding-top: 1.4rem;
+  font-size: 0.8rem;
 }
