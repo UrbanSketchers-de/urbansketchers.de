@@ -1,9 +1,9 @@
 * {
   margin: 0;
   padding: 0;
-  line-height: 1.5rem;
+  line-height: 1.4rem;
 
-  font-family: Georgia, Palatino, serif;
+ font-family: Lato, Open Sans, SF Pro Display, Helvetica Neue, Arial, sans-serif;
 }
 
 html, body {
@@ -12,7 +12,7 @@ html, body {
 
 body {
   background: #fff;
-  padding-top: 2em;
+  padding-top: 2.8rem;
 }
 
 a {
@@ -28,7 +28,19 @@ a:hover {
   color: #f90;
 }
 
-hr { margin: 1.4rem 0; border-width: 0.1rem; }
+hr { margin: 1.3rem 0; border-width: 0.1rem 0 0 0; border-color: #ddd; border-style: solid; }
+
+h1 { font-family: Georgia, Palatino, serif; }
+h1, h2 {
+  margin-top: 1.4rem;
+  line-height: 2.8rem;
+  color: #444;
+}
+h3, h4, h5 {
+  margin-top: 1.4rem;
+  line-height: 1.4rem;
+  color: #333;
+}
 
 #wrapper {
   display: grid;
@@ -37,6 +49,7 @@ hr { margin: 1.4rem 0; border-width: 0.1rem; }
                          "sidebar"
                          "footer";
   gap: 1em;
+  padding: 0.7rem;
 }
 
 #main {
@@ -79,24 +92,18 @@ hr { margin: 1.4rem 0; border-width: 0.1rem; }
 }
 
 #sidebar {
-  border-left: 1px solid #ccc;
+  border-left: 0.1rem solid #ddd;
   padding-left: 1em;
   grid-area: sidebar;
 }
 
 #sidebar h2 {
-  text-transform: uppercase;
-
   font-size: 1rem;
-  color: #333;
-  letter-spacing: 1px;
   line-height: 2.8rem;
-  margin-bottom: 1.4rem;
 }
 
 #sidebar ul {
   list-style-type: none;
-  margin: 20px 0;
 }
 
 #sidebar li {
