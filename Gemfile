@@ -7,6 +7,7 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 group 'nanoc' do
   gem 'nanoc'
   gem 'nanoc-live'
+  gem 'webrick', '~> 1.7'  # Ruby 3.x doesn't ship with WEBrick anymore
 end
 
 gem 'dotenv', '~> 2'
