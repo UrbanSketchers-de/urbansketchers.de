@@ -55,12 +55,11 @@ main > h1 {
   font-family: var(--font-display);
   font-weight: 900;
   text-transform: uppercase;
-  line-height: 0.85;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
   width: 100vw;
   margin-left: 50%;
   transform: translateX(-50%);
-  margin-bottom: 2rem;
+  margin-bottom: 0;
   background: linear-gradient(
     160deg,
     var(--accent-orange) 0%,
@@ -78,8 +77,8 @@ main > h1 {
 
 main > h1 span {
   display: block;
-  font-size: 13.5vw;
-  line-height: 0.88;
+  font-size: clamp(3rem, 17vw, 14rem);
+  line-height: 0.82;
 }
 
 @keyframes gradient-shift {
@@ -91,12 +90,22 @@ main > h1::after {
   display: none;
 }
 
+.subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(1.1rem, 3vw, 2rem);
+  font-weight: 400;
+  color: var(--ink-faint);
+  letter-spacing: 0.02em;
+  margin-bottom: 1.5rem;
+  padding-left: 0.15em;
+}
+
 main > p {
-  font-size: 1.15rem;
+  font-size: clamp(1.05rem, 1.5vw + 0.5rem, 1.5rem);
   color: var(--ink-light);
-  margin-bottom: 2rem;
-  max-width: 640px;
-  line-height: 1.7;
+  margin-bottom: 2.5rem;
+  max-width: 720px;
+  line-height: 1.65;
   font-weight: 400;
 }
 
