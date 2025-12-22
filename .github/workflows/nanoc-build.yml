@@ -15,7 +15,7 @@ jobs:
         ssh-host: urbansketchers.de
     - uses: actions/checkout@v2
     - name: Setup Ruby
-      uses: ruby/setup-ruby@v1.99.0
+      uses: ruby/setup-ruby@v1
       with:
         bundler-cache: true
     - name: Build the site
