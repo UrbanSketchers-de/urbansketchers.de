@@ -137,11 +137,11 @@ main > p {
 }
 
 .browse-map {
-  order: 2;
+  order: 1;
 }
 
 .browse-list {
-  order: 1;
+  order: 2;
 }
 
 #city-search {
@@ -183,7 +183,7 @@ main > p {
 }
 
 .browse-map {
-  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 @media (min-width: 900px) {
@@ -330,7 +330,7 @@ main > p {
 }
 
 .popup-fb { background: var(--accent-blue); }
-.popup-ig { background: var(--accent-pink); }
+.popup-ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
 .popup-wa { background: #00a884; }
 
 .leaflet-control-attribution {
@@ -434,8 +434,9 @@ main > p {
 }
 
 .btn-instagram {
-  background: var(--accent-pink);
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
   color: #fff !important;
+  border: none;
 }
 
 .btn-instagram:hover {
