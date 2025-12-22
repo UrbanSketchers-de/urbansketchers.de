@@ -1,4 +1,5 @@
 require 'csv'
+require 'listen'
 
 class CitiesDataSource < Nanoc::DataSource
   identifier :cities_csv
@@ -22,6 +23,23 @@ class CitiesDataSource < Nanoc::DataSource
         "/#{slugify(row['city'])}"
       )
     end
+  end
+
+  def item_changes
+    csv_path = @config[:csv_path] || 'data/cities.csv'
+    data_dir = File.join(@site_config.dir, File.dirname(csv_path))
+
+    Enumerator.new do |yielder|
+      listener = Listen.to(data_dir, only: /\.csv$/, latency: 0.5) do
+        yielder << :unknown
+      end
+      listener.start
+      sleep
+    end
+  end
+
+  def layout_changes
+    Enumerator.new { |_| sleep }
   end
 
   private
