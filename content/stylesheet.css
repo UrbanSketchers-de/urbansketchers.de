@@ -103,7 +103,7 @@ hgroup h1 {
 
 hgroup h1 span {
   display: block;
-  font-size: clamp(3rem, 17vw, 14rem);
+  font-size: clamp(3rem, 19cqi, 14rem);
   line-height: 0.82;
 }
 
@@ -119,11 +119,12 @@ hgroup h1::after {
 hgroup {
   margin-bottom: 0;
   overflow: visible;
+  container-type: inline-size;
 }
 
 hgroup p {
   font-family: var(--font-display);
-  font-size: clamp(1.1rem, 3vw, 2rem);
+  font-size: clamp(1.1rem, 3.5cqi, 2rem);
   font-weight: 900;
   color: var(--accent-orange);
   letter-spacing: 0.02em;
