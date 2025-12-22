@@ -2,28 +2,18 @@
 <html lang="de">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= @item[:title] %> - USk DE</title>
     <link rel="stylesheet" href="/stylesheet.css">
-
-    <!-- you don't need to keep this, but it's cool for stats! -->
-    <meta name="generator" content="Nanoc <%= Nanoc::VERSION %>">
   </head>
   <body>
-    <div id="wrapper">
-      <main id="main">
-        <%= yield %>
-      </main>
-      <aside id="sidebar">
-        <h2>Weblinks</h2>
-        <ul>
-          <li><a href="https://urbansketchers.org/de/">Offizielle USk Seite</a></li>
-        </ul>
-      </aside>
-      <footer id="footer">
-        <p>Impressum / Verantwortlich gem. TMG:<br>
-          Christian Tietze, Dostalstr. 18, 33647 Bielefeld &bull; <a href="mailto:christian.tietze@gmail.com">Email</a></p>
-        <p>Datenschutz: Diese Seite sammelt keine Daten. Nur normale Server-Logs (IP, Zeitpunkt, aufgerufene Seite).</p>
-      </footer>
-    </div>
+    <main>
+      <%= yield %>
+    </main>
+    <footer>
+      <a href="https://urbansketchers.org/de/">Urban Sketchers International</a>
+      <p>Impressum: Christian Tietze, Dostalstr. 18, 33647 Bielefeld &bull; <a href="mailto:christian.tietze@gmail.com">Email</a></p>
+      <p>Datenschutz: Diese Seite sammelt keine Daten. Nur normale Server-Logs (IP, Zeitpunkt, aufgerufene Seite).</p>
+    </footer>
   </body>
 </html>
