@@ -10,14 +10,14 @@ title: Urban Sketchers in Deutschland
 <h3><%= city[:city] %></h3>
 <ul>
   <li><%= city[:description] %></li>
-<% if city[:facebook] && !city[:facebook].empty? %>
-  <li><a href="<%= city[:facebook] %>">Infos und Bilder öffentlich auf Facebook</a></li>
-<% end %>
-<% if city[:instagram] && !city[:instagram].empty? %>
-  <li><a href="<%= city[:instagram] %>">Terminankündigungen und Bilder auf Instagram</a></li>
-<% end %>
-<% if city[:whatsapp] && !city[:whatsapp].empty? %>
-  <li><a href="<%= city[:whatsapp] %>">WhatsApp Gruppe für Termine und Absprachen</a></li>
+<%
+  links = []
+  links << %(<a href="#{city[:facebook]}">Facebook</a>) if city[:facebook] && !city[:facebook].empty?
+  links << %(<a href="#{city[:instagram]}">Instagram</a>) if city[:instagram] && !city[:instagram].empty?
+  links << %(<a href="#{city[:whatsapp]}">WhatsApp</a>) if city[:whatsapp] && !city[:whatsapp].empty?
+%>
+<% unless links.empty? %>
+  <li><%= links.join(' · ') %></li>
 <% end %>
 </ul>
 <% end %>
