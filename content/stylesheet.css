@@ -20,6 +20,7 @@
 
 html {
   font-size: 17px;
+  overflow-x: clip;
 }
 
 body {
@@ -30,7 +31,6 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
 }
 
 a {
@@ -48,7 +48,7 @@ main {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem 1.25rem 4rem;
+  padding: 2rem 1.25rem 4rem;
 }
 
 hgroup h1 {
