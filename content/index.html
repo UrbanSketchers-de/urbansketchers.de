@@ -8,9 +8,16 @@ title: Urban Sketchers in Deutschland
 
 <input type="search" id="city-search" placeholder="Stadt suchen…" autocomplete="off">
 
+<div id="map"></div>
+
 <div class="cities">
 <% @items.find_all('/cities/*').sort_by { |c| c[:city] }.each do |city| %>
-<article class="city-card" data-city="<%= city[:city].downcase %>">
+<%
+  slug = city[:city].downcase
+    .gsub(/[äÄ]/, 'ae').gsub(/[öÖ]/, 'oe').gsub(/[üÜ]/, 'ue').gsub(/ß/, 'ss')
+    .gsub(/[^a-z0-9]+/, '-').gsub(/^-|-$/, '')
+%>
+<article class="city-card" id="city-<%= slug %>" data-city="<%= city[:city].downcase %>" data-slug="<%= slug %>">
   <h3><%= city[:city] %></h3>
   <p class="description"><%= city[:description] %></p>
   <div class="social-links">
@@ -29,10 +36,74 @@ title: Urban Sketchers in Deutschland
 </div>
 
 <script>
-document.getElementById('city-search').addEventListener('input', function(e) {
-  var query = e.target.value.toLowerCase();
-  document.querySelectorAll('.city-card').forEach(function(card) {
-    card.style.display = card.dataset.city.includes(query) ? '' : 'none';
+(function() {
+  var cities = [
+<% @items.find_all('/cities/*').each do |city| %>
+<% if city[:lat] && city[:lon] %>
+<%
+  slug = city[:city].downcase
+    .gsub(/[äÄ]/, 'ae').gsub(/[öÖ]/, 'oe').gsub(/[üÜ]/, 'ue').gsub(/ß/, 'ss')
+    .gsub(/[^a-z0-9]+/, '-').gsub(/^-|-$/, '')
+%>
+    { name: "<%= city[:city] %>", lat: <%= city[:lat] %>, lon: <%= city[:lon] %>, slug: "<%= slug %>" },
+<% end %>
+<% end %>
+  ];
+
+  var map = L.map('map', { scrollWheelZoom: false });
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    maxZoom: 18
+  }).addTo(map);
+
+  var markers = {};
+
+  cities.forEach(function(city) {
+    var marker = L.circleMarker([city.lat, city.lon], {
+      radius: 10,
+      fillColor: '#d4915a',
+      color: '#8b7355',
+      weight: 2,
+      opacity: 0.9,
+      fillOpacity: 0.7
+    }).addTo(map);
+
+    marker.bindPopup('<strong>' + city.name + '</strong>');
+
+    marker.on('click', function() {
+      var card = document.getElementById('city-' + city.slug);
+      if (card) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        card.classList.add('highlight');
+        setTimeout(function() { card.classList.remove('highlight'); }, 2000);
+      }
+    });
+
+    markers[city.slug] = marker;
   });
-});
+
+  if (cities.length > 0) {
+    var bounds = L.latLngBounds(cities.map(function(c) { return [c.lat, c.lon]; }));
+    map.fitBounds(bounds, { padding: [30, 30] });
+  }
+
+  document.getElementById('city-search').addEventListener('input', function(e) {
+    var query = e.target.value.toLowerCase();
+
+    document.querySelectorAll('.city-card').forEach(function(card) {
+      var matches = card.dataset.city.includes(query);
+      card.style.display = matches ? '' : 'none';
+
+      var slug = card.dataset.slug;
+      if (markers[slug]) {
+        if (matches) {
+          markers[slug].setStyle({ fillOpacity: 0.7, opacity: 0.9 });
+        } else {
+          markers[slug].setStyle({ fillOpacity: 0.15, opacity: 0.3 });
+        }
+      }
+    });
+  });
+})();
 </script>

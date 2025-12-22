@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= @item[:title] %> - USk DE</title>
     <link rel="stylesheet" href="/stylesheet.css">
+    <link rel="stylesheet" href="/lib/leaflet/leaflet.css">
   </head>
   <body>
     <main>
@@ -13,7 +14,8 @@
     <footer>
       <a href="https://urbansketchers.org/de/">Urban Sketchers International</a>
       <p>Impressum: Christian Tietze, Dostalstr. 18, 33647 Bielefeld &bull; <a href="mailto:christian.tietze@gmail.com">Email</a></p>
-      <p>Datenschutz: Diese Seite sammelt keine Daten. Nur normale Server-Logs (IP, Zeitpunkt, aufgerufene Seite).</p>
+      <p>Datenschutz: Diese Seite sammelt keine Daten. Nur normale Server-Logs. Kartendaten von <a href="https://osmfoundation.org/wiki/Privacy_Policy">OpenStreetMap</a>.</p>
     </footer>
+    <script src="/lib/leaflet/leaflet.js"></script>
   </body>
 </html>
