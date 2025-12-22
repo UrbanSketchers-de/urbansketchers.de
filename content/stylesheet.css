@@ -79,25 +79,54 @@ main {
 }
 
 hgroup h1 {
-  margin: 0;
-  line-height: 1;
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  margin-bottom: -0.1em;
+  padding-bottom: 0.1em;
+  overflow: visible;
+  background: linear-gradient(
+    160deg,
+    var(--accent-orange) 0%,
+    var(--accent-pink) 25%,
+    var(--accent-blue) 50%,
+    var(--accent-teal) 75%,
+    var(--accent-orange) 100%
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-shift 8s ease infinite;
 }
 
-.title-svg {
+hgroup h1 span {
   display: block;
-  width: 100%;
-  max-width: 50rem;
-  height: auto;
+  font-size: clamp(3rem, 14vw, 14rem);
+  font-size: clamp(3rem, 16cqi, 14rem);
+  line-height: 0.82;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+hgroup h1::after {
+  display: none;
 }
 
 hgroup {
   margin-bottom: 0;
   overflow: visible;
+  container-type: inline-size;
 }
 
 hgroup p {
   font-family: var(--font-display);
   font-size: clamp(1.1rem, 3vw, 2rem);
+  font-size: clamp(1.1rem, 3.5cqi, 2rem);
   font-weight: 900;
   color: var(--accent-orange);
   letter-spacing: 0.02em;
