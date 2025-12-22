@@ -46,9 +46,14 @@ a:hover {
 main {
   flex: 1;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1.25rem 4rem;
+  padding: 2rem 1.5rem 4rem;
+}
+
+@media (min-width: 900px) {
+  main {
+    padding-left: calc((100vw - min(100vw - 3rem, 1600px)) / 2 + 1.5rem);
+    padding-right: calc((100vw - min(100vw - 3rem, 1600px)) / 2 + 1.5rem);
+  }
 }
 
 hgroup h1 {
@@ -56,9 +61,6 @@ hgroup h1 {
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: -0.04em;
-  width: 100vw;
-  margin-left: 50%;
-  transform: translateX(-50%);
   margin-bottom: 0;
   background: linear-gradient(
     160deg,
@@ -165,10 +167,6 @@ main > p {
     flex-direction: row;
     gap: 2.5rem;
     align-items: stretch;
-    margin-left: 50%;
-    transform: translateX(-50%);
-    width: calc(100vw - 3rem);
-    max-width: 1600px;
     height: calc(100vh - 2rem);
     max-height: 800px;
   }
