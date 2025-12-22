@@ -6,11 +6,13 @@ title: Urban Sketchers in Deutschland
 
 <p>Urban Sketchers freuen sich über Besuch und neue Gesichter. Bei Interesse melde dich einfach bei einer Gruppe in deiner Nähe und schau bei einem Treffen vorbei!</p>
 
-<input type="search" id="city-search" placeholder="Stadt suchen…" autocomplete="off">
-
-<div id="map"></div>
-
-<div class="cities">
+<div class="browse-layout">
+  <div class="browse-map">
+    <div id="map"></div>
+  </div>
+  <div class="browse-list">
+    <input type="search" id="city-search" placeholder="Stadt suchen…" autocomplete="off">
+    <div class="cities">
 <% @items.find_all('/cities/*').sort_by { |c| c[:city] }.each do |city| %>
 <%
   slug = city[:city].downcase
@@ -33,6 +35,8 @@ title: Urban Sketchers in Deutschland
   </div>
 </article>
 <% end %>
+    </div>
+  </div>
 </div>
 
 <script>
