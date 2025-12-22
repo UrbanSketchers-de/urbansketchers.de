@@ -103,8 +103,8 @@ hgroup h1 {
 
 hgroup h1 span {
   display: block;
-  font-size: clamp(3rem, 17vw, 14rem);
-  font-size: clamp(3rem, 19cqi, 14rem);
+  font-size: clamp(3rem, 14vw, 14rem);
+  font-size: clamp(3rem, 16cqi, 14rem);
   line-height: 0.82;
 }
 
