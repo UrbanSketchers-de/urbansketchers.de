@@ -52,10 +52,11 @@ main {
 @media (min-width: 900px) {
   main {
     display: grid;
-    grid-template-columns: 1fr 1fr minmax(2rem, 1fr);
+    grid-template-columns: 1fr 1fr minmax(2rem, 0.5fr);
     gap: 2.5rem;
     padding: 3rem;
-    padding-right: 0;
+    padding-left: clamp(3rem, 8vw, 12rem);
+    padding-right: clamp(1rem, 3vw, 4rem);
   }
 
   main > hgroup {
