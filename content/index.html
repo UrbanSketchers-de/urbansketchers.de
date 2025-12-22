@@ -6,35 +6,18 @@ title: Urban Sketchers in Deutschland
 
 <p>Urban Sketchers freuen sich über Besuch und neue Gesichter. Bei Interesse melde dich einfach bei einer Gruppe in deiner Nähe und schau bei einem Treffen vorbei!</p>
 
-<h3>Bielefeld</h3>
+<% @items.find_all('/cities/*').sort_by { |c| c[:city] }.each do |city| %>
+<h3><%= city[:city] %></h3>
 <ul>
-  <li>Treffen in der Stadt: meist Sonntags von ca. 11 bis ca. 15 Uhr</li>
-  <li><a href="https://www.facebook.com/groups/usk.bielefeld">Infos und Bilder öffentlich auf Facebook</a></li>
-  <li><a href="https://chat.whatsapp.com/CjSVEdvT5kk1AByXhfLswk">WhatsApp Gruppe für Termine und Absprachen</a></li>
+  <li><%= city[:description] %></li>
+<% if city[:facebook] && !city[:facebook].empty? %>
+  <li><a href="<%= city[:facebook] %>">Infos und Bilder öffentlich auf Facebook</a></li>
+<% end %>
+<% if city[:instagram] && !city[:instagram].empty? %>
+  <li><a href="<%= city[:instagram] %>">Terminankündigungen und Bilder auf Instagram</a></li>
+<% end %>
+<% if city[:whatsapp] && !city[:whatsapp].empty? %>
+  <li><a href="<%= city[:whatsapp] %>">WhatsApp Gruppe für Termine und Absprachen</a></li>
+<% end %>
 </ul>
-
-<h3>Lübeck</h3>
-
-<ul>
-  <li>Treffen jeden 1. und 3. Sonntag im Monat, 11.00 Uhr - 13.00 Uhr (zum Throwdown).</li>
-</ul>
-
-<h3>Osnabrück</h3>
-<ul>
-  <li>Treffen jeden 1. und 3. Sonntag im Monat, 11.00 Uhr - 13.00 Uhr (zum Throwdown).</li>
-  <li><a href="https://www.instagram.com/uskosna/">Terminankündigungen und Bilder auf Instagram</a></li>
-  <li><a href="https://chat.whatsapp.com/B8Y9Y82gw4s11bjBT2hvog">WhatsApp Gruppe für Termine und Absprachen</a></li>
-</ul>
-
-<h3>Paderborn</h3>
-<ul>
-  <li>Treffen fast jeden Samstag von 11 bis ca. 13 Uhr</li>
-  <li><a href="https://facebook.com/groups/usk.paderborn">Terminankündigung auf Facebook</a> (auch ohne Facebook Account einsehbar)</li>
-</ul>
-
-<h3>Porta-Westfalica</h3>
-<p>
-  Treffen: immer am zweiten Samstag im Monat, von 10 bis 12 Uhr. Ort wird auf WhatsApp besprochen und auf
-  <a href="https://www.facebook.com/groups/461399851412346">auf Facebook (Urban Sketchers Porta Westfalica)</a>
-  und <a href="https://www.instagram.com/urbansketcherspw/">auf Instagram (@urbansketcherspw)</a> bekannt gegeben.
-</p>
+<% end %>
