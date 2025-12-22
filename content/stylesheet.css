@@ -1,7 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Source+Sans+3:wght@400;600&display=swap');
-
 :root {
-  --font-handwritten: 'Caveat', 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
+  --font-handwritten: 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
 }
 
 * {
@@ -27,7 +25,7 @@ html {
 }
 
 body {
-  font-family: 'Source Sans 3', Georgia, serif;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   background: var(--paper);
   background-image:
     radial-gradient(ellipse at 20% 30%, rgba(107, 158, 190, 0.08) 0%, transparent 50%),
