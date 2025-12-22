@@ -75,12 +75,12 @@ title: Urban Sketchers in Deutschland
 
   cities.forEach(function(city) {
     var marker = L.circleMarker([city.lat, city.lon], {
-      radius: 10,
-      fillColor: '#d4915a',
-      color: '#8b7355',
-      weight: 2,
-      opacity: 0.9,
-      fillOpacity: 0.7
+      radius: 12,
+      fillColor: '#e85d04',
+      color: '#1a1a1a',
+      weight: 3,
+      opacity: 1,
+      fillOpacity: 0.9
     }).addTo(map);
 
     var popupContent = '<div class="map-popup">' +

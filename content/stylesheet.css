@@ -151,18 +151,22 @@ main > p {
 @media (min-width: 900px) {
   .browse-layout {
     flex-direction: row;
-    gap: 0;
+    gap: 2.5rem;
     align-items: stretch;
     margin-left: 50%;
     transform: translateX(-50%);
-    width: 100vw;
+    width: calc(100vw - 3rem);
+    max-width: 1600px;
     height: calc(100vh - 2rem);
     max-height: 800px;
   }
 
   .browse-map {
     order: 1;
-    flex: 1.2;
+    flex: 1.3;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
   }
 
   .browse-list {
@@ -170,9 +174,8 @@ main > p {
     flex: 1;
     min-width: 0;
     overflow-y: auto;
-    padding: 1.5rem;
-    background: var(--paper);
-    border-left: 2px solid var(--ink);
+    padding: 0.5rem;
+    padding-top: 0;
   }
 
   #city-search {
@@ -180,17 +183,39 @@ main > p {
     top: 0;
     background: var(--paper);
     margin-bottom: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.85rem;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    z-index: 10;
+  }
+
+  #city-search:focus {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08), 0 0 0 3px var(--accent-blue);
   }
 
   #map {
     height: 100%;
     min-height: auto;
     border: none;
-    border-right: none;
+    border-radius: 12px;
   }
 
   .cities {
     grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
+
+  .city-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  .city-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   }
 }
 
