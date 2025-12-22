@@ -158,16 +158,59 @@ main > p {
 }
 
 .leaflet-popup-content-wrapper {
-  font-family: var(--font-handwritten);
-  font-size: 1.1rem;
   background: var(--paper);
-  border-radius: 6px;
-  box-shadow: 0 3px 12px rgba(44, 36, 22, 0.15);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(44, 36, 22, 0.18);
+  padding: 0;
+}
+
+.leaflet-popup-content {
+  margin: 0;
 }
 
 .leaflet-popup-tip {
   background: var(--paper);
 }
+
+.map-popup {
+  padding: 0.75rem 1rem 1rem;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.map-popup strong {
+  font-family: var(--font-handwritten);
+  font-size: 1.3rem;
+  color: var(--ink);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.map-popup p {
+  font-size: 0.85rem;
+  color: var(--ink-light);
+  line-height: 1.5;
+  margin: 0 0 0.75rem 0;
+}
+
+.popup-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.popup-btn {
+  display: inline-block;
+  padding: 0.3rem 0.7rem;
+  border-radius: 14px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #fff !important;
+}
+
+.popup-fb { background: #3b5998; }
+.popup-ig { background: linear-gradient(135deg, #f77737, #c13584); }
+.popup-wa { background: #25d366; }
 
 .leaflet-control-attribution {
   font-size: 0.65rem;

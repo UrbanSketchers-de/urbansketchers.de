@@ -44,8 +44,18 @@ title: Urban Sketchers in Deutschland
   slug = city[:city].downcase
     .gsub(/[äÄ]/, 'ae').gsub(/[öÖ]/, 'oe').gsub(/[üÜ]/, 'ue').gsub(/ß/, 'ss')
     .gsub(/[^a-z0-9]+/, '-').gsub(/^-|-$/, '')
+  desc_escaped = (city[:description] || '').gsub('"', '&quot;').gsub("'", "&#39;")
 %>
-    { name: "<%= city[:city] %>", lat: <%= city[:lat] %>, lon: <%= city[:lon] %>, slug: "<%= slug %>" },
+    {
+      name: "<%= city[:city] %>",
+      lat: <%= city[:lat] %>,
+      lon: <%= city[:lon] %>,
+      slug: "<%= slug %>",
+      description: "<%= desc_escaped %>",
+      facebook: "<%= city[:facebook] || '' %>",
+      instagram: "<%= city[:instagram] || '' %>",
+      whatsapp: "<%= city[:whatsapp] || '' %>"
+    },
 <% end %>
 <% end %>
   ];
@@ -69,17 +79,16 @@ title: Urban Sketchers in Deutschland
       fillOpacity: 0.7
     }).addTo(map);
 
-    marker.bindPopup('<strong>' + city.name + '</strong>');
+    var popupContent = '<div class="map-popup">' +
+      '<strong>' + city.name + '</strong>' +
+      '<p>' + city.description + '</p>' +
+      '<div class="popup-links">';
+    if (city.facebook) popupContent += '<a href="' + city.facebook + '" class="popup-btn popup-fb">Facebook</a>';
+    if (city.instagram) popupContent += '<a href="' + city.instagram + '" class="popup-btn popup-ig">Instagram</a>';
+    if (city.whatsapp) popupContent += '<a href="' + city.whatsapp + '" class="popup-btn popup-wa">WhatsApp</a>';
+    popupContent += '</div></div>';
 
-    marker.on('click', function() {
-      var card = document.getElementById('city-' + city.slug);
-      if (card) {
-        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        card.classList.add('highlight');
-        setTimeout(function() { card.classList.remove('highlight'); }, 2000);
-      }
-    });
-
+    marker.bindPopup(popupContent, { maxWidth: 280 });
     markers[city.slug] = marker;
   });
 
