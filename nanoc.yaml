@@ -9,6 +9,8 @@ prune:
 data_sources:
   - type: filesystem
     encoding: utf-8
+  - type: cities_csv
+    items_root: /cities
 
 deploy:
   default:

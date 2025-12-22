@@ -11,7 +11,10 @@ compile '/htaccess.*' do
   write '/.htaccess'
 end
 
+ignore '/cities/**/*'
+
 compile '/**/*.html' do
+  filter :erb
   layout '/default.*'
 
   if item.identifier =~ '**/index.*'
