@@ -90,6 +90,31 @@ main > p {
   line-height: 1.7;
 }
 
+#city-search {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  padding: 0.7rem 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--ink);
+  background: #fff;
+  border: 2px solid var(--paper-dark);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#city-search::placeholder {
+  color: var(--ink-faint);
+}
+
+#city-search:focus {
+  border-color: var(--watercolor-blue);
+  box-shadow: 0 0 0 3px rgba(107, 158, 190, 0.15);
+}
+
 .cities {
   display: grid;
   grid-template-columns: 1fr;

@@ -6,9 +6,11 @@ title: Urban Sketchers in Deutschland
 
 <p>Urban Sketchers freuen sich über Besuch und neue Gesichter. Bei Interesse melde dich einfach bei einer Gruppe in deiner Nähe und schau bei einem Treffen vorbei!</p>
 
+<input type="search" id="city-search" placeholder="Stadt suchen…" autocomplete="off">
+
 <div class="cities">
 <% @items.find_all('/cities/*').sort_by { |c| c[:city] }.each do |city| %>
-<article class="city-card">
+<article class="city-card" data-city="<%= city[:city].downcase %>">
   <h3><%= city[:city] %></h3>
   <p class="description"><%= city[:description] %></p>
   <div class="social-links">
@@ -25,3 +27,12 @@ title: Urban Sketchers in Deutschland
 </article>
 <% end %>
 </div>
+
+<script>
+document.getElementById('city-search').addEventListener('input', function(e) {
+  var query = e.target.value.toLowerCase();
+  document.querySelectorAll('.city-card').forEach(function(card) {
+    card.style.display = card.dataset.city.includes(query) ? '' : 'none';
+  });
+});
+</script>
