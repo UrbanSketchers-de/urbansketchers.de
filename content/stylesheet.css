@@ -53,18 +53,22 @@ main {
 
 main > h1 {
   font-family: var(--font-display);
-  font-size: clamp(3.5rem, 18vw, 12rem);
+  font-size: clamp(4rem, 22vw, 28rem);
   font-weight: 900;
   text-transform: uppercase;
-  line-height: 0.85;
-  letter-spacing: -0.03em;
-  margin: 0 -0.5rem 1rem;
+  line-height: 0.78;
+  letter-spacing: -0.04em;
+  width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  padding: 0 0.5rem;
+  margin-bottom: 1.5rem;
   background: linear-gradient(
     135deg,
     var(--accent-orange) 0%,
-    var(--accent-pink) 25%,
-    var(--accent-blue) 50%,
-    var(--accent-teal) 75%,
+    var(--accent-pink) 20%,
+    var(--accent-blue) 45%,
+    var(--accent-teal) 70%,
     var(--accent-orange) 100%
   );
   background-size: 200% 200%;
