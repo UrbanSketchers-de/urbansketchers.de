@@ -1,0 +1,154 @@
+name: Issue zu Pull Request
+
+on:
+  issues:
+    types: [opened, edited]
+
+jobs:
+  process-issue:
+    if: contains(github.event.issue.labels.*.name, 'neue-stadt') || contains(github.event.issue.labels.*.name, 'aktualisierung')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Parse issue and update CSV
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const issue = context.payload.issue;
+            const body = issue.body;
+            const isNewCity = issue.labels.some(l => l.name === 'neue-stadt');
+
+            // Parse form fields from issue body
+            function parseField(body, label) {
+              const regex = new RegExp(`### ${label}\\s*\\n\\s*([^#]*?)(?=\\n###|$)`, 's');
+              const match = body.match(regex);
+              if (!match) return '';
+              let value = match[1].trim();
+              // Handle "no response" placeholder
+              if (value === '_No response_' || value === 'None') return '';
+              return value;
+            }
+
+            const city = parseField(body, 'Stadt');
+            const description = parseField(body, 'Treffpunkt & Zeiten');
+            const facebook = parseField(body, 'Facebook');
+            const instagram = parseField(body, 'Instagram');
+            const whatsapp = parseField(body, 'WhatsApp');
+
+            if (!city) {
+              console.log('No city found in issue');
+              return;
+            }
+
+            // Read current CSV
+            const csvPath = 'data/cities.csv';
+            let csvContent = fs.readFileSync(csvPath, 'utf8');
+            let lines = csvContent.trim().split('\n');
+            const header = lines[0];
+            let dataLines = lines.slice(1);
+
+            // Helper to escape CSV field
+            function escapeCSV(field) {
+              if (!field) return '';
+              if (field.includes(',') || field.includes('"') || field.includes('\n')) {
+                return '"' + field.replace(/"/g, '""') + '"';
+              }
+              return field;
+            }
+
+            // Helper to parse CSV line
+            function parseCSVLine(line) {
+              const result = [];
+              let current = '';
+              let inQuotes = false;
+              for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                if (char === '"') {
+                  if (inQuotes && line[i+1] === '"') {
+                    current += '"';
+                    i++;
+                  } else {
+                    inQuotes = !inQuotes;
+                  }
+                } else if (char === ',' && !inQuotes) {
+                  result.push(current);
+                  current = '';
+                } else {
+                  current += char;
+                }
+              }
+              result.push(current);
+              return result;
+            }
+
+            if (isNewCity) {
+              // Add new city
+              const newLine = [city, facebook, instagram, whatsapp, description].map(escapeCSV).join(',');
+              dataLines.push(newLine);
+              // Sort alphabetically by city name
+              dataLines.sort((a, b) => {
+                const cityA = parseCSVLine(a)[0].toLowerCase();
+                const cityB = parseCSVLine(b)[0].toLowerCase();
+                return cityA.localeCompare(cityB, 'de');
+              });
+            } else {
+              // Update existing city
+              let found = false;
+              dataLines = dataLines.map(line => {
+                const fields = parseCSVLine(line);
+                if (fields[0].toLowerCase() === city.toLowerCase()) {
+                  found = true;
+                  // Update only non-empty fields, handle "entfernen"
+                  const newFacebook = facebook === 'entfernen' ? '' : (facebook || fields[1]);
+                  const newInstagram = instagram === 'entfernen' ? '' : (instagram || fields[2]);
+                  const newWhatsapp = whatsapp === 'entfernen' ? '' : (whatsapp || fields[3]);
+                  const newDescription = description || fields[4];
+                  return [fields[0], newFacebook, newInstagram, newWhatsapp, newDescription].map(escapeCSV).join(',');
+                }
+                return line;
+              });
+
+              if (!found) {
+                core.setFailed(`Stadt "${city}" nicht gefunden`);
+                return;
+              }
+            }
+
+            // Write updated CSV
+            const newContent = [header, ...dataLines].join('\n') + '\n';
+            fs.writeFileSync(csvPath, newContent);
+
+            // Set outputs for next steps
+            core.exportVariable('CITY_NAME', city);
+            core.exportVariable('IS_NEW', isNewCity ? 'true' : 'false');
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "${{ env.IS_NEW == 'true' && 'Neue Stadt' || 'Aktualisierung' }}: ${{ env.CITY_NAME }}"
+          title: "${{ env.IS_NEW == 'true' && 'Neue Stadt' || 'Aktualisierung' }}: ${{ env.CITY_NAME }}"
+          body: |
+            Automatisch erstellt aus Issue #${{ github.event.issue.number }}
+
+            ${{ github.event.issue.html_url }}
+          branch: "issue-${{ github.event.issue.number }}"
+          labels: automatisch
+
+      - name: Comment on issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: '🎨 Pull Request wurde automatisch erstellt! Ein Maintainer wird die Änderung prüfen und freigeben.'
+            });
