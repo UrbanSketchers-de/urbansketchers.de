@@ -51,7 +51,7 @@ main {
   padding: 1rem 1.25rem 4rem;
 }
 
-main > h1 {
+hgroup h1 {
   font-family: var(--font-display);
   font-weight: 900;
   text-transform: uppercase;
@@ -75,7 +75,7 @@ main > h1 {
   animation: gradient-shift 8s ease infinite;
 }
 
-main > h1 span {
+hgroup h1 span {
   display: block;
   font-size: clamp(3rem, 17vw, 14rem);
   line-height: 0.82;
@@ -86,17 +86,20 @@ main > h1 span {
   50% { background-position: 100% 50%; }
 }
 
-main > h1::after {
+hgroup h1::after {
   display: none;
 }
 
-.subtitle {
+hgroup {
+  margin-bottom: 1.5rem;
+}
+
+hgroup p {
   font-family: var(--font-body);
   font-size: clamp(1.1rem, 3vw, 2rem);
   font-weight: 400;
   color: var(--ink-faint);
   letter-spacing: 0.02em;
-  margin-bottom: 1.5rem;
   padding-left: 0.15em;
 }
 
