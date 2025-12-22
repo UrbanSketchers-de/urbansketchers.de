@@ -132,8 +132,13 @@ title: Urban Sketchers in Deutschland
       if (marker) {
         var city = cities.find(function(c) { return c.slug === slug; });
         if (city) {
-          map.setView([city.lat, city.lon], 11, { animate: true });
-          marker.openPopup();
+          map.flyTo([city.lat, city.lon], 12, {
+            duration: 0.8,
+            easeLinearity: 0.25
+          });
+          setTimeout(function() {
+            marker.openPopup();
+          }, 400);
         }
       }
     });
