@@ -1,0 +1,54 @@
+name: Stadt aktualisieren
+description: Aktualisiere Infos einer bestehenden Urban Sketchers Gruppe
+title: "Aktualisierung: "
+labels: ["aktualisierung"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Hier kannst du die Infos einer bestehenden Gruppe aktualisieren.
+        Fülle nur die Felder aus, die sich ändern sollen.
+
+  - type: input
+    id: city
+    attributes:
+      label: Stadt
+      description: Welche Stadt möchtest du aktualisieren?
+      placeholder: z.B. Bielefeld
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Treffpunkt & Zeiten
+      description: Neuer Text für Treffpunkt/Zeiten (leer lassen wenn unverändert)
+      placeholder: "z.B. Treffen jeden Sonntag, 11-14 Uhr"
+
+  - type: input
+    id: facebook
+    attributes:
+      label: Facebook
+      description: Neuer Facebook-Link (leer = unverändert, "entfernen" = Link löschen)
+      placeholder: https://facebook.com/groups/...
+
+  - type: input
+    id: instagram
+    attributes:
+      label: Instagram
+      description: Neuer Instagram-Link (leer = unverändert, "entfernen" = Link löschen)
+      placeholder: https://instagram.com/...
+
+  - type: input
+    id: whatsapp
+    attributes:
+      label: WhatsApp
+      description: Neuer WhatsApp-Link (leer = unverändert, "entfernen" = Link löschen)
+      placeholder: https://chat.whatsapp.com/...
+
+  - type: textarea
+    id: reason
+    attributes:
+      label: Grund der Änderung
+      description: Optional - warum wird aktualisiert?
+      placeholder: z.B. Neue Treffzeiten ab Januar

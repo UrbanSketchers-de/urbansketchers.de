@@ -1,0 +1,57 @@
+name: Neue Stadt hinzufügen
+description: Füge eine neue Urban Sketchers Gruppe hinzu
+title: "Neue Stadt: "
+labels: ["neue-stadt"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Danke, dass du eine neue Urban Sketchers Gruppe hinzufügen möchtest!
+        Bitte fülle die folgenden Felder aus.
+
+  - type: input
+    id: city
+    attributes:
+      label: Stadt
+      description: Name der Stadt
+      placeholder: z.B. Hamburg
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Treffpunkt & Zeiten
+      description: Wann und wo trefft ihr euch?
+      placeholder: "z.B. Treffen jeden 1. und 3. Sonntag im Monat, 11-14 Uhr"
+    validations:
+      required: true
+
+  - type: input
+    id: facebook
+    attributes:
+      label: Facebook
+      description: Link zur Facebook-Gruppe (optional)
+      placeholder: https://facebook.com/groups/...
+
+  - type: input
+    id: instagram
+    attributes:
+      label: Instagram
+      description: Link zum Instagram-Account (optional)
+      placeholder: https://instagram.com/...
+
+  - type: input
+    id: whatsapp
+    attributes:
+      label: WhatsApp
+      description: Einladungslink zur WhatsApp-Gruppe (optional)
+      placeholder: https://chat.whatsapp.com/...
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Bestätigung
+      options:
+        - label: Ich bin berechtigt, diese Gruppe hier zu listen
+          required: true
