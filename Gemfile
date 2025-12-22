@@ -17,6 +17,9 @@ gem 'redcarpet', '>3.0'
 gem 'rouge' # syntax highlighting
 gem 'typogruby' # Fallback when Redcarpet is not available
 
+# CSV support (required from Ruby 3.4+)
+gem 'csv'
+
 # needed for tasks
 gem 'rake'
 gem 'terminal-notifier'
