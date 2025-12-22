@@ -114,9 +114,26 @@ title: Urban Sketchers in Deutschland
       var slug = card.dataset.slug;
       if (markers[slug]) {
         if (matches) {
-          markers[slug].setStyle({ fillOpacity: 0.7, opacity: 0.9 });
+          markers[slug].setStyle({ fillOpacity: 0.9, opacity: 1 });
         } else {
           markers[slug].setStyle({ fillOpacity: 0.15, opacity: 0.3 });
+        }
+      }
+    });
+  });
+
+  document.querySelectorAll('.city-card').forEach(function(card) {
+    card.style.cursor = 'pointer';
+
+    card.addEventListener('click', function(e) {
+      if (e.target.closest('a')) return;
+      var slug = card.dataset.slug;
+      var marker = markers[slug];
+      if (marker) {
+        var city = cities.find(function(c) { return c.slug === slug; });
+        if (city) {
+          map.setView([city.lat, city.lon], 11, { animate: true });
+          marker.openPopup();
         }
       }
     });
