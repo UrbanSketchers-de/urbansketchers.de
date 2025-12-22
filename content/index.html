@@ -6,18 +6,22 @@ title: Urban Sketchers in Deutschland
 
 <p>Urban Sketchers freuen sich über Besuch und neue Gesichter. Bei Interesse melde dich einfach bei einer Gruppe in deiner Nähe und schau bei einem Treffen vorbei!</p>
 
+<div class="cities">
 <% @items.find_all('/cities/*').sort_by { |c| c[:city] }.each do |city| %>
-<h3><%= city[:city] %></h3>
-<ul>
-  <li><%= city[:description] %></li>
-<%
-  links = []
-  links << %(<a href="#{city[:facebook]}">Facebook</a>) if city[:facebook] && !city[:facebook].empty?
-  links << %(<a href="#{city[:instagram]}">Instagram</a>) if city[:instagram] && !city[:instagram].empty?
-  links << %(<a href="#{city[:whatsapp]}">WhatsApp</a>) if city[:whatsapp] && !city[:whatsapp].empty?
-%>
-<% unless links.empty? %>
-  <li><%= links.join(' · ') %></li>
+<article class="city-card">
+  <h3><%= city[:city] %></h3>
+  <p class="description"><%= city[:description] %></p>
+  <div class="social-links">
+<% if city[:facebook] && !city[:facebook].empty? %>
+    <a href="<%= city[:facebook] %>" class="btn btn-facebook">Facebook</a>
 <% end %>
-</ul>
+<% if city[:instagram] && !city[:instagram].empty? %>
+    <a href="<%= city[:instagram] %>" class="btn btn-instagram">Instagram</a>
 <% end %>
+<% if city[:whatsapp] && !city[:whatsapp].empty? %>
+    <a href="<%= city[:whatsapp] %>" class="btn btn-whatsapp">WhatsApp</a>
+<% end %>
+  </div>
+</article>
+<% end %>
+</div>
