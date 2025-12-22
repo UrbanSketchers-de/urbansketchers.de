@@ -6,6 +6,8 @@ BYPASS_FILES.each do |file|
   passthrough "/#{file}"
 end
 
+passthrough '/lib/**/*'
+
 compile '/htaccess.*' do
   filter :erb
   write '/.htaccess'
