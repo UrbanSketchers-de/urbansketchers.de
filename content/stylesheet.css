@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Source+Sans+3:wght@400;600&display=swap');
 
+:root {
+  --font-handwritten: 'Caveat', 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -72,7 +76,7 @@ a:hover {
 }
 
 #main h1 {
-  font-family: 'Caveat', cursive;
+  font-family: var(--font-handwritten);
   font-size: 3.5rem;
   font-weight: 600;
   color: var(--ink);
@@ -160,7 +164,7 @@ a:hover {
 }
 
 .city-card h3 {
-  font-family: 'Caveat', cursive;
+  font-family: var(--font-handwritten);
   font-size: 1.8rem;
   font-weight: 600;
   color: var(--ink);
@@ -250,7 +254,7 @@ a:hover {
 }
 
 #sidebar h2 {
-  font-family: 'Caveat', cursive;
+  font-family: var(--font-handwritten);
   font-size: 1.5rem;
   color: var(--ink);
   margin-bottom: 0.75rem;
