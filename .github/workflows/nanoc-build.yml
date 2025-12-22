@@ -21,4 +21,4 @@ jobs:
     - name: Build the site
       run: bundle exec nanoc compile
     - name: Deploy
-      run: bundle exec nanoc deploy public
+      run: bundle exec nanoc deploy
