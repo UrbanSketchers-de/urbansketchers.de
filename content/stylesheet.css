@@ -52,6 +52,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 0.8lh;
+  overflow: visible;
 }
 
 @media (min-width: 900px) {
@@ -63,6 +64,7 @@ main {
       minmax(0, 1fr) [right-gutter];
     gap: 2.5rem;
     padding: 0;
+    overflow: visible;
   }
 
   main > hgroup {
