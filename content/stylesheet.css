@@ -53,22 +53,20 @@ main {
 
 main > h1 {
   font-family: var(--font-display);
-  font-size: clamp(4rem, 22vw, 28rem);
   font-weight: 900;
   text-transform: uppercase;
-  line-height: 0.78;
-  letter-spacing: -0.04em;
+  line-height: 0.85;
+  letter-spacing: -0.03em;
   width: 100vw;
   margin-left: 50%;
   transform: translateX(-50%);
-  padding: 0 0.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   background: linear-gradient(
-    135deg,
+    160deg,
     var(--accent-orange) 0%,
-    var(--accent-pink) 20%,
-    var(--accent-blue) 45%,
-    var(--accent-teal) 70%,
+    var(--accent-pink) 25%,
+    var(--accent-blue) 50%,
+    var(--accent-teal) 75%,
     var(--accent-orange) 100%
   );
   background-size: 200% 200%;
@@ -76,6 +74,12 @@ main > h1 {
   background-clip: text;
   color: transparent;
   animation: gradient-shift 8s ease infinite;
+}
+
+main > h1 span {
+  display: block;
+  font-size: 13.5vw;
+  line-height: 0.88;
 }
 
 @keyframes gradient-shift {
