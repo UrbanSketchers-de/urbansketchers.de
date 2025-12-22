@@ -15,6 +15,8 @@ class CitiesDataSource < Nanoc::DataSource
         '',
         {
           city: row['city'],
+          lat: row['lat']&.to_f,
+          lon: row['lon']&.to_f,
           facebook: row['facebook'],
           instagram: row['instagram'],
           whatsapp: row['whatsapp'],
