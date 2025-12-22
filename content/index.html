@@ -43,8 +43,8 @@ title: Urban Sketchers in Deutschland
 </div>
 
 <script>
-(function() {
-  var cities = [
+{
+  const cities = [
 <% @items.find_all('/cities/*').each do |city| %>
 <% if city[:lat] && city[:lon] %>
 <%
@@ -67,17 +67,33 @@ title: Urban Sketchers in Deutschland
 <% end %>
   ];
 
-  var map = L.map('map', { scrollWheelZoom: false });
+  const createPopupContent = ({ name, description, facebook, instagram, whatsapp }) => {
+    const links = [
+      facebook && `<a href="${facebook}" class="popup-btn popup-fb">Facebook</a>`,
+      instagram && `<a href="${instagram}" class="popup-btn popup-ig">Instagram</a>`,
+      whatsapp && `<a href="${whatsapp}" class="popup-btn popup-wa">WhatsApp</a>`
+    ].filter(Boolean).join('');
+
+    return `
+      <div class="map-popup">
+        <strong>${name}</strong>
+        <p>${description}</p>
+        <div class="popup-links">${links}</div>
+      </div>
+    `;
+  };
+
+  const map = L.map('map', { scrollWheelZoom: false });
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     maxZoom: 18
   }).addTo(map);
 
-  var markers = {};
+  const markers = new Map();
 
-  cities.forEach(function(city) {
-    var marker = L.circleMarker([city.lat, city.lon], {
+  for (const city of cities) {
+    const marker = L.circleMarker([city.lat, city.lon], {
       radius: 12,
       fillColor: '#e85d04',
       color: '#1a1a1a',
@@ -86,62 +102,37 @@ title: Urban Sketchers in Deutschland
       fillOpacity: 0.9
     }).addTo(map);
 
-    var popupContent = '<div class="map-popup">' +
-      '<strong>' + city.name + '</strong>' +
-      '<p>' + city.description + '</p>' +
-      '<div class="popup-links">';
-    if (city.facebook) popupContent += '<a href="' + city.facebook + '" class="popup-btn popup-fb">Facebook</a>';
-    if (city.instagram) popupContent += '<a href="' + city.instagram + '" class="popup-btn popup-ig">Instagram</a>';
-    if (city.whatsapp) popupContent += '<a href="' + city.whatsapp + '" class="popup-btn popup-wa">WhatsApp</a>';
-    popupContent += '</div></div>';
-
-    marker.bindPopup(popupContent, { maxWidth: 280 });
-    markers[city.slug] = marker;
-  });
+    marker.bindPopup(createPopupContent(city), { maxWidth: 280 });
+    markers.set(city.slug, marker);
+  }
 
   if (cities.length > 0) {
-    var bounds = L.latLngBounds(cities.map(function(c) { return [c.lat, c.lon]; }));
+    const bounds = L.latLngBounds(cities.map(({ lat, lon }) => [lat, lon]));
     map.fitBounds(bounds, { padding: [30, 30] });
   }
 
-  document.getElementById('city-search').addEventListener('input', function(e) {
-    var query = e.target.value.toLowerCase();
+  document.getElementById('city-search').addEventListener('input', ({ target }) => {
+    const query = target.value.toLowerCase();
 
-    document.querySelectorAll('.city-card').forEach(function(card) {
-      var matches = card.dataset.city.includes(query);
+    for (const card of document.querySelectorAll('.city-card')) {
+      const matches = card.dataset.city.includes(query);
       card.style.display = matches ? '' : 'none';
 
-      var slug = card.dataset.slug;
-      if (markers[slug]) {
-        if (matches) {
-          markers[slug].setStyle({ fillOpacity: 0.9, opacity: 1 });
-        } else {
-          markers[slug].setStyle({ fillOpacity: 0.15, opacity: 0.3 });
-        }
-      }
-    });
+      const marker = markers.get(card.dataset.slug);
+      marker?.setStyle({
+        fillOpacity: matches ? 0.9 : 0.15,
+        opacity: matches ? 1 : 0.3
+      });
+    }
   });
 
-  document.querySelectorAll('.city-card').forEach(function(card) {
+  for (const card of document.querySelectorAll('.city-card')) {
     card.style.cursor = 'pointer';
 
-    card.addEventListener('click', function(e) {
+    card.addEventListener('click', (e) => {
       if (e.target.closest('a')) return;
-      var slug = card.dataset.slug;
-      var marker = markers[slug];
-      if (marker) {
-        var city = cities.find(function(c) { return c.slug === slug; });
-        if (city) {
-          map.flyTo([city.lat, city.lon], 12, {
-            duration: 0.8,
-            easeLinearity: 0.25
-          });
-          setTimeout(function() {
-            marker.openPopup();
-          }, 400);
-        }
-      }
+      markers.get(card.dataset.slug)?.openPopup();
     });
-  });
-})();
+  }
+}
 </script>
