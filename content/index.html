@@ -27,13 +27,13 @@ title: Urban Sketchers in Deutschland
   <p class="description"><%= city[:description] %></p>
   <div class="social-links">
 <% if city[:facebook] && !city[:facebook].empty? %>
-    <a href="<%= city[:facebook] %>" class="btn btn-facebook">Facebook</a>
+    <a href="<%= city[:facebook] %>" class="btn btn-facebook" target="_blank" rel="noopener">Facebook</a>
 <% end %>
 <% if city[:instagram] && !city[:instagram].empty? %>
-    <a href="<%= city[:instagram] %>" class="btn btn-instagram">Instagram</a>
+    <a href="<%= city[:instagram] %>" class="btn btn-instagram" target="_blank" rel="noopener">Instagram</a>
 <% end %>
 <% if city[:whatsapp] && !city[:whatsapp].empty? %>
-    <a href="<%= city[:whatsapp] %>" class="btn btn-whatsapp">WhatsApp</a>
+    <a href="<%= city[:whatsapp] %>" class="btn btn-whatsapp" target="_blank" rel="noopener">WhatsApp</a>
 <% end %>
   </div>
 </article>
@@ -69,9 +69,9 @@ title: Urban Sketchers in Deutschland
 
   const createPopupContent = ({ name, description, facebook, instagram, whatsapp }) => {
     const links = [
-      facebook && `<a href="${facebook}" class="popup-btn popup-fb">Facebook</a>`,
-      instagram && `<a href="${instagram}" class="popup-btn popup-ig">Instagram</a>`,
-      whatsapp && `<a href="${whatsapp}" class="popup-btn popup-wa">WhatsApp</a>`
+      facebook && `<a href="${facebook}" class="popup-btn popup-fb" target="_blank" rel="noopener">Facebook</a>`,
+      instagram && `<a href="${instagram}" class="popup-btn popup-ig" target="_blank" rel="noopener">Instagram</a>`,
+      whatsapp && `<a href="${whatsapp}" class="popup-btn popup-wa" target="_blank" rel="noopener">WhatsApp</a>`
     ].filter(Boolean).join('');
 
     return `
