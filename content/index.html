@@ -30,7 +30,10 @@ title: Urban Sketchers in Deutschland
     <a href="<%= city[:facebook] %>" class="btn btn-facebook" target="_blank" rel="noopener">Facebook</a>
 <% end %>
 <% if city[:instagram] && !city[:instagram].empty? %>
-    <a href="<%= city[:instagram] %>" class="btn btn-instagram" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://instagram.com/<%= city[:instagram].sub(/^@/, '') %>" class="btn btn-instagram" target="_blank" rel="noopener">Instagram</a>
+<% end %>
+<% if city[:bluesky] && !city[:bluesky].empty? %>
+    <a href="https://bsky.app/profile/<%= city[:bluesky].sub(/^@/, '') %>" class="btn btn-bluesky" target="_blank" rel="noopener">Bluesky</a>
 <% end %>
 <% if city[:whatsapp] && !city[:whatsapp].empty? %>
     <a href="<%= city[:whatsapp] %>" class="btn btn-whatsapp" target="_blank" rel="noopener">WhatsApp</a>
@@ -61,16 +64,18 @@ title: Urban Sketchers in Deutschland
       description: "<%= desc_escaped %>",
       facebook: "<%= city[:facebook] || '' %>",
       instagram: "<%= city[:instagram] || '' %>",
+      bluesky: "<%= city[:bluesky] || '' %>",
       whatsapp: "<%= city[:whatsapp] || '' %>"
     },
 <% end %>
 <% end %>
   ];
 
-  const createPopupContent = ({ name, description, facebook, instagram, whatsapp }) => {
+  const createPopupContent = ({ name, description, facebook, instagram, bluesky, whatsapp }) => {
     const links = [
       facebook && `<a href="${facebook}" class="popup-btn popup-fb" target="_blank" rel="noopener">Facebook</a>`,
-      instagram && `<a href="${instagram}" class="popup-btn popup-ig" target="_blank" rel="noopener">Instagram</a>`,
+      instagram && `<a href="https://instagram.com/${instagram.replace(/^@/, '')}" class="popup-btn popup-ig" target="_blank" rel="noopener">Instagram</a>`,
+      bluesky && `<a href="https://bsky.app/profile/${bluesky.replace(/^@/, '')}" class="popup-btn popup-bs" target="_blank" rel="noopener">Bluesky</a>`,
       whatsapp && `<a href="${whatsapp}" class="popup-btn popup-wa" target="_blank" rel="noopener">WhatsApp</a>`
     ].filter(Boolean).join('');
 
