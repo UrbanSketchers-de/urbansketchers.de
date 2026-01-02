@@ -194,6 +194,47 @@ main > p {
   box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.2);
 }
 
+.search-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  order: 2;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.75rem;
+  background: var(--card);
+  border: 2px solid var(--ink);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.filter-chip:hover {
+  background: var(--card-dark);
+}
+
+.filter-chip:has(input:checked) {
+  background: var(--accent-orange);
+  border-color: var(--accent-orange);
+  color: #fff;
+}
+
+.filter-chip input {
+  display: none;
+}
+
 #map {
   width: 100%;
   height: 35vh;
@@ -219,12 +260,20 @@ main > p {
     display: contents;
   }
 
-  #city-search {
+  .search-filters {
     grid-column: 3 / content-end;
     grid-row: 3;
-    width: auto;
-    margin-bottom: 0;
     margin-right: 0.5rem;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  #city-search {
+    width: auto;
+    flex: 1;
+    margin-bottom: 0;
+    position: static;
+    box-shadow: none;
   }
 
   .browse-map {

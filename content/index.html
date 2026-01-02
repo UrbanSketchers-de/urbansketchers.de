@@ -10,7 +10,15 @@ title: Urban Sketchers in Deutschland
 <p>Urban Sketchers freuen sich über Besuch und neue Gesichter. Bei Interesse melde dich einfach bei einer Gruppe in deiner Nähe und schau bei einem Treffen vorbei!</p>
 
 <div class="browse-layout">
-  <input type="search" id="city-search" placeholder="Stadt suchen…" autocomplete="off" autofocus>
+  <div class="search-filters">
+    <input type="search" id="city-search" placeholder="Stadt suchen…" autocomplete="off" autofocus>
+    <div class="filters">
+      <label class="filter-chip"><input type="checkbox" value="facebook"> Facebook</label>
+      <label class="filter-chip"><input type="checkbox" value="instagram"> Instagram</label>
+      <label class="filter-chip"><input type="checkbox" value="bluesky"> Bluesky</label>
+      <label class="filter-chip"><input type="checkbox" value="whatsapp"> WhatsApp</label>
+    </div>
+  </div>
   <div class="browse-map">
     <div id="map"></div>
   </div>
@@ -22,7 +30,7 @@ title: Urban Sketchers in Deutschland
     .gsub(/[äÄ]/, 'ae').gsub(/[öÖ]/, 'oe').gsub(/[üÜ]/, 'ue').gsub(/ß/, 'ss')
     .gsub(/[^a-z0-9]+/, '-').gsub(/^-|-$/, '')
 %>
-<article class="city-card" id="city-<%= slug %>" data-city="<%= city[:city].downcase %>" data-slug="<%= slug %>">
+<article class="city-card" id="city-<%= slug %>" data-city="<%= city[:city].downcase %>" data-slug="<%= slug %>" data-facebook="<%= city[:facebook] && !city[:facebook].empty? ? '1' : '' %>" data-instagram="<%= city[:instagram] && !city[:instagram].empty? ? '1' : '' %>" data-bluesky="<%= city[:bluesky] && !city[:bluesky].empty? ? '1' : '' %>" data-whatsapp="<%= city[:whatsapp] && !city[:whatsapp].empty? ? '1' : '' %>">
   <h3><%= city[:city] %></h3>
   <p class="description"><%= city[:description] %></p>
   <div class="social-links">
@@ -116,11 +124,18 @@ title: Urban Sketchers in Deutschland
     map.fitBounds(bounds, { padding: [30, 30] });
   }
 
-  document.getElementById('city-search').addEventListener('input', ({ target }) => {
-    const query = target.value.toLowerCase();
+  const searchInput = document.getElementById('city-search');
+  const filterCheckboxes = document.querySelectorAll('.filters input[type="checkbox"]');
+
+  const applyFilters = () => {
+    const query = searchInput.value.toLowerCase();
+    const activeFilters = [...filterCheckboxes].filter(cb => cb.checked).map(cb => cb.value);
 
     for (const card of document.querySelectorAll('.city-card')) {
-      const matches = card.dataset.city.includes(query);
+      const matchesSearch = card.dataset.city.includes(query);
+      const matchesFilters = activeFilters.length === 0 || activeFilters.every(f => card.dataset[f] === '1');
+      const matches = matchesSearch && matchesFilters;
+
       card.style.display = matches ? '' : 'none';
 
       const marker = markers.get(card.dataset.slug);
@@ -129,7 +144,10 @@ title: Urban Sketchers in Deutschland
         opacity: matches ? 1 : 0.3
       });
     }
-  });
+  };
+
+  searchInput.addEventListener('input', applyFilters);
+  filterCheckboxes.forEach(cb => cb.addEventListener('change', applyFilters));
 
   for (const card of document.querySelectorAll('.city-card')) {
     card.style.cursor = 'pointer';
