@@ -46,7 +46,8 @@ title: Urban Sketchers in Deutschland
     <a href="<%= city[:website].start_with?('http') ? city[:website] : 'https://' + city[:website] %>" class="btn btn-website" target="_blank" rel="noopener">Website</a>
 <% end %>
 <% if city[:email] && !city[:email].empty? %>
-    <a href="mailto:<%= city[:email] %>" class="btn btn-email">E-Mail</a>
+<%   email_addr = city[:email] =~ /<(.+)>/ ? $1 : city[:email] %>
+    <a href="mailto:<%= email_addr %>" class="btn btn-email">E-Mail</a>
 <% end %>
 <% if city[:facebook] && !city[:facebook].empty? %>
     <a href="<%= city[:facebook] %>" class="btn btn-facebook" target="_blank" rel="noopener">Facebook</a>
@@ -97,9 +98,11 @@ title: Urban Sketchers in Deutschland
 
   const createPopupContent = ({ name, description, website, email, facebook, instagram, bluesky, whatsapp }) => {
     const websiteUrl = website && (website.startsWith('http') ? website : 'https://' + website);
+    const emailMatch = email && email.match(/<(.+)>/);
+    const emailAddr = emailMatch ? emailMatch[1] : email;
     const links = [
       website && `<a href="${websiteUrl}" class="popup-btn popup-web" target="_blank" rel="noopener">Website</a>`,
-      email && `<a href="mailto:${email}" class="popup-btn popup-email">E-Mail</a>`,
+      email && `<a href="mailto:${emailAddr}" class="popup-btn popup-email">E-Mail</a>`,
       facebook && `<a href="${facebook}" class="popup-btn popup-fb" target="_blank" rel="noopener">Facebook</a>`,
       instagram && `<a href="https://instagram.com/${instagram.replace(/^@/, '')}" class="popup-btn popup-ig" target="_blank" rel="noopener">Instagram</a>`,
       bluesky && `<a href="https://bsky.app/profile/${bluesky.replace(/^@/, '')}" class="popup-btn popup-bs" target="_blank" rel="noopener">Bluesky</a>`,
