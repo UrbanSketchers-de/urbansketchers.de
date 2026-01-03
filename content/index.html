@@ -41,12 +41,12 @@ title: Urban Sketchers in Deutschland
 <% if city[:is_official] %><img src="/usk-logo.png" alt="Offizielles Chapter" class="official-badge"><% end %>
   <h3><%= city[:city] %></h3>
   <p class="description"><%= city[:description] %></p>
-<% if city[:website] && !city[:website].empty? %>
-  <a href="<%= city[:website].start_with?('http') ? city[:website] : 'https://' + city[:website] %>" class="btn btn-website" target="_blank" rel="noopener">Website besuchen</a>
-<% end %>
   <div class="social-links">
+<% if city[:website] && !city[:website].empty? %>
+    <a href="<%= city[:website].start_with?('http') ? city[:website] : 'https://' + city[:website] %>" class="btn btn-website" target="_blank" rel="noopener">Website</a>
+<% end %>
 <% if city[:email] && !city[:email].empty? %>
-    <a href="mailto:<%= city[:email] %>" class="btn btn-email">Kontakt</a>
+    <a href="mailto:<%= city[:email] %>" class="btn btn-email">E-Mail</a>
 <% end %>
 <% if city[:facebook] && !city[:facebook].empty? %>
     <a href="<%= city[:facebook] %>" class="btn btn-facebook" target="_blank" rel="noopener">Facebook</a>

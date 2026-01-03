@@ -499,28 +499,6 @@ main > p {
   flex: 1;
 }
 
-.btn-website {
-  display: block;
-  width: 100%;
-  text-align: center;
-  padding: 0.6rem 1rem;
-  margin-bottom: 0.75rem;
-  background: var(--ink);
-  color: #fff !important;
-  font-size: 0.85rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  text-decoration: none;
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
-}
-
-.btn-website:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 3px 3px 0 var(--accent-orange);
-  color: #fff !important;
-}
-
 .social-links {
   display: flex;
   flex-wrap: wrap;
@@ -582,13 +560,23 @@ main > p {
   box-shadow: 3px 3px 0 #007a60;
 }
 
-.btn-email {
-  background: var(--accent-orange);
+.btn-website {
+  background: var(--ink);
   color: #fff !important;
 }
 
+.btn-website:hover {
+  box-shadow: 3px 3px 0 #000;
+}
+
+.btn-email {
+  background: #fff;
+  color: var(--ink) !important;
+  border: 2px solid var(--ink);
+}
+
 .btn-email:hover {
-  box-shadow: 3px 3px 0 #b34a03;
+  box-shadow: 3px 3px 0 var(--ink-light);
 }
 
 footer {
