@@ -18,32 +18,78 @@ body:
     validations:
       required: true
 
+  - type: input
+    id: lat
+    attributes:
+      label: Breitengrad (lat)
+      description: "Neuer Wert (leer = unverändert). [latlong.net](https://www.latlong.net/)"
+      placeholder: "z.B. 53.5511"
+
+  - type: input
+    id: lon
+    attributes:
+      label: Längengrad (lon)
+      description: "Neuer Wert (leer = unverändert). [latlong.net](https://www.latlong.net/)"
+      placeholder: "z.B. 9.9937"
+
+  - type: dropdown
+    id: is_official
+    attributes:
+      label: Offizielles Chapter?
+      description: Status ändern? (leer = unverändert)
+      options:
+        - ""
+        - "Nein"
+        - "Ja"
+      default: 0
+
   - type: textarea
     id: description
     attributes:
       label: Treffpunkt & Zeiten
-      description: Neuer Text für Treffpunkt/Zeiten (leer lassen wenn unverändert)
+      description: Neuer Text (leer = unverändert, "entfernen" = Text löschen)
       placeholder: "z.B. Treffen jeden Sonntag, 11-14 Uhr"
+
+  - type: input
+    id: website
+    attributes:
+      label: Website
+      description: Neue URL (leer = unverändert, "entfernen" = löschen)
+      placeholder: www.example.de
+
+  - type: input
+    id: email
+    attributes:
+      label: E-Mail
+      description: Neue E-Mail (leer = unverändert, "entfernen" = löschen)
+      placeholder: kontakt@example.de
 
   - type: input
     id: facebook
     attributes:
       label: Facebook
-      description: Neuer Facebook-Link (leer = unverändert, "entfernen" = Link löschen)
+      description: Neuer Link (leer = unverändert, "entfernen" = löschen)
       placeholder: https://facebook.com/groups/...
 
   - type: input
     id: instagram
     attributes:
       label: Instagram
-      description: Neuer Instagram-Link (leer = unverändert, "entfernen" = Link löschen)
-      placeholder: https://instagram.com/...
+      description: Neues Handle (leer = unverändert, "entfernen" = löschen)
+      placeholder: "@usk_hamburg"
+
+  - type: input
+    id: bluesky
+    attributes:
+      label: Bluesky
+      description: Neues Handle (leer = unverändert, "entfernen" = löschen)
+      placeholder: "@usk-hamburg.bsky.social"
 
   - type: input
     id: whatsapp
     attributes:
       label: WhatsApp
-      description: Neuer WhatsApp-Link (leer = unverändert, "entfernen" = Link löschen)
+      description: Neuer Link (leer = unverändert, "entfernen" = löschen)
       placeholder: https://chat.whatsapp.com/...
 
   - type: textarea

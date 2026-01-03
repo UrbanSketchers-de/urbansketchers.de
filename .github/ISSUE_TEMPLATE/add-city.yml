@@ -18,14 +18,54 @@ body:
     validations:
       required: true
 
+  - type: input
+    id: lat
+    attributes:
+      label: Breitengrad (lat)
+      description: "Koordinaten findest du auf [latlong.net](https://www.latlong.net/)"
+      placeholder: "z.B. 53.5511"
+    validations:
+      required: true
+
+  - type: input
+    id: lon
+    attributes:
+      label: Längengrad (lon)
+      description: "Koordinaten findest du auf [latlong.net](https://www.latlong.net/)"
+      placeholder: "z.B. 9.9937"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: is_official
+    attributes:
+      label: Offizielles Chapter?
+      description: Ist die Gruppe ein offizielles Urban Sketchers Chapter?
+      options:
+        - "Nein"
+        - "Ja"
+      default: 0
+
   - type: textarea
     id: description
     attributes:
       label: Treffpunkt & Zeiten
-      description: Wann und wo trefft ihr euch?
+      description: Wann und wo trefft ihr euch? (optional)
       placeholder: "z.B. Treffen jeden 1. und 3. Sonntag im Monat, 11-14 Uhr"
-    validations:
-      required: true
+
+  - type: input
+    id: website
+    attributes:
+      label: Website
+      description: URL zur eigenen Website (optional)
+      placeholder: www.example.de
+
+  - type: input
+    id: email
+    attributes:
+      label: E-Mail
+      description: Kontakt-E-Mail (optional)
+      placeholder: kontakt@example.de
 
   - type: input
     id: facebook
@@ -38,8 +78,15 @@ body:
     id: instagram
     attributes:
       label: Instagram
-      description: Link zum Instagram-Account (optional)
-      placeholder: https://instagram.com/...
+      description: Instagram-Handle (optional)
+      placeholder: "@usk_hamburg"
+
+  - type: input
+    id: bluesky
+    attributes:
+      label: Bluesky
+      description: Bluesky-Handle (optional)
+      placeholder: "@usk-hamburg.bsky.social"
 
   - type: input
     id: whatsapp
