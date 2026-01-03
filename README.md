@@ -24,10 +24,18 @@ Alle Städte-Daten liegen in einer einfachen CSV-Datei:
 | Spalte | Beschreibung | Beispiel |
 |--------|--------------|----------|
 | `city` | Name der Stadt | `Bielefeld` |
+| `lat` | Breitengrad für die Karte | `52.0302` |
+| `lon` | Längengrad für die Karte | `8.5325` |
+| `is_official` | Offizielles USk Chapter? (1 = ja, leer = nein) | `1` |
+| `website` | URL zur eigenen Website (optional) | `www.example.de` |
+| `email` | Kontakt-E-Mail (optional) | `kontakt@example.de` |
 | `facebook` | Link zur Facebook-Gruppe (optional) | `https://facebook.com/groups/...` |
-| `instagram` | Link zum Instagram-Account (optional) | `https://instagram.com/...` |
+| `instagram` | Instagram-Handle ohne URL (optional) | `@usk_bielefeld` |
+| `bluesky` | Bluesky-Handle (optional) | `@usk.bsky.social` |
 | `whatsapp` | Einladungslink zur WhatsApp-Gruppe (optional) | `https://chat.whatsapp.com/...` |
-| `description` | Wann und wo ihr euch trefft | `Treffen jeden Sonntag, 11-14 Uhr` |
+| `description` | Wann und wo ihr euch trefft (optional) | `Treffen jeden Sonntag, 11-14 Uhr` |
+
+💡 **Koordinaten finden:** Gib deine Stadt auf [latlong.net](https://www.latlong.net/) ein — die Koordinaten werden direkt angezeigt und können kopiert werden.
 
 #### So bearbeitest du die Datei auf GitHub:
 
