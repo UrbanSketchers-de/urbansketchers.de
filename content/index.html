@@ -18,6 +18,8 @@ title: Urban Sketchers in Deutschland
         <label><input type="radio" name="official" value="official"> Offiziell</label>
         <label><input type="radio" name="official" value="unofficial"> Inoffiziell</label>
       </div>
+      <label class="filter-chip"><input type="checkbox" value="website"> Website</label>
+      <label class="filter-chip"><input type="checkbox" value="email"> Email</label>
       <label class="filter-chip"><input type="checkbox" value="facebook"> Facebook</label>
       <label class="filter-chip"><input type="checkbox" value="instagram"> Instagram</label>
       <label class="filter-chip"><input type="checkbox" value="bluesky"> Bluesky</label>
@@ -35,11 +37,17 @@ title: Urban Sketchers in Deutschland
     .gsub(/[äÄ]/, 'ae').gsub(/[öÖ]/, 'oe').gsub(/[üÜ]/, 'ue').gsub(/ß/, 'ss')
     .gsub(/[^a-z0-9]+/, '-').gsub(/^-|-$/, '')
 %>
-<article class="city-card" id="city-<%= slug %>" data-city="<%= city[:city].downcase %>" data-slug="<%= slug %>" data-official="<%= city[:is_official] ? '1' : '' %>" data-facebook="<%= city[:facebook] && !city[:facebook].empty? ? '1' : '' %>" data-instagram="<%= city[:instagram] && !city[:instagram].empty? ? '1' : '' %>" data-bluesky="<%= city[:bluesky] && !city[:bluesky].empty? ? '1' : '' %>" data-whatsapp="<%= city[:whatsapp] && !city[:whatsapp].empty? ? '1' : '' %>">
+<article class="city-card" id="city-<%= slug %>" data-city="<%= city[:city].downcase %>" data-slug="<%= slug %>" data-official="<%= city[:is_official] ? '1' : '' %>" data-website="<%= city[:website] && !city[:website].empty? ? '1' : '' %>" data-email="<%= city[:email] && !city[:email].empty? ? '1' : '' %>" data-facebook="<%= city[:facebook] && !city[:facebook].empty? ? '1' : '' %>" data-instagram="<%= city[:instagram] && !city[:instagram].empty? ? '1' : '' %>" data-bluesky="<%= city[:bluesky] && !city[:bluesky].empty? ? '1' : '' %>" data-whatsapp="<%= city[:whatsapp] && !city[:whatsapp].empty? ? '1' : '' %>">
 <% if city[:is_official] %><img src="/usk-logo.png" alt="Offizielles Chapter" class="official-badge"><% end %>
   <h3><%= city[:city] %></h3>
   <p class="description"><%= city[:description] %></p>
+<% if city[:website] && !city[:website].empty? %>
+  <a href="<%= city[:website].start_with?('http') ? city[:website] : 'https://' + city[:website] %>" class="btn btn-website" target="_blank" rel="noopener">Website besuchen</a>
+<% end %>
   <div class="social-links">
+<% if city[:email] && !city[:email].empty? %>
+    <a href="mailto:<%= city[:email] %>" class="btn btn-email">Kontakt</a>
+<% end %>
 <% if city[:facebook] && !city[:facebook].empty? %>
     <a href="<%= city[:facebook] %>" class="btn btn-facebook" target="_blank" rel="noopener">Facebook</a>
 <% end %>

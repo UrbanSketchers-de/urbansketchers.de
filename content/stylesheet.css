@@ -499,6 +499,28 @@ main > p {
   flex: 1;
 }
 
+.btn-website {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 0.6rem 1rem;
+  margin-bottom: 0.75rem;
+  background: var(--ink);
+  color: #fff !important;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.btn-website:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 3px 3px 0 var(--accent-orange);
+  color: #fff !important;
+}
+
 .social-links {
   display: flex;
   flex-wrap: wrap;
@@ -558,6 +580,15 @@ main > p {
 
 .btn-whatsapp:hover {
   box-shadow: 3px 3px 0 #007a60;
+}
+
+.btn-email {
+  background: var(--accent-orange);
+  color: #fff !important;
+}
+
+.btn-email:hover {
+  box-shadow: 3px 3px 0 #b34a03;
 }
 
 footer {
