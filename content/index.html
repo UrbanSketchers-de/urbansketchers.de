@@ -84,6 +84,8 @@ title: Urban Sketchers in Deutschland
       lon: <%= city[:lon] %>,
       slug: "<%= slug %>",
       description: "<%= desc_escaped %>",
+      website: "<%= city[:website] || '' %>",
+      email: "<%= city[:email] || '' %>",
       facebook: "<%= city[:facebook] || '' %>",
       instagram: "<%= city[:instagram] || '' %>",
       bluesky: "<%= city[:bluesky] || '' %>",
@@ -93,8 +95,11 @@ title: Urban Sketchers in Deutschland
 <% end %>
   ];
 
-  const createPopupContent = ({ name, description, facebook, instagram, bluesky, whatsapp }) => {
+  const createPopupContent = ({ name, description, website, email, facebook, instagram, bluesky, whatsapp }) => {
+    const websiteUrl = website && (website.startsWith('http') ? website : 'https://' + website);
     const links = [
+      website && `<a href="${websiteUrl}" class="popup-btn popup-web" target="_blank" rel="noopener">Website</a>`,
+      email && `<a href="mailto:${email}" class="popup-btn popup-email">E-Mail</a>`,
       facebook && `<a href="${facebook}" class="popup-btn popup-fb" target="_blank" rel="noopener">Facebook</a>`,
       instagram && `<a href="https://instagram.com/${instagram.replace(/^@/, '')}" class="popup-btn popup-ig" target="_blank" rel="noopener">Instagram</a>`,
       bluesky && `<a href="https://bsky.app/profile/${bluesky.replace(/^@/, '')}" class="popup-btn popup-bs" target="_blank" rel="noopener">Bluesky</a>`,

@@ -418,6 +418,8 @@ main > p {
   border: none;
 }
 
+.popup-web { background: var(--ink); }
+.popup-email { background: #fff; color: var(--ink) !important; border: 1px solid var(--ink); }
 .popup-fb { background: var(--accent-blue); }
 .popup-ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
 .popup-bs { background: #1185fe; }
