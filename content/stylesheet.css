@@ -471,6 +471,15 @@ main > p {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
 }
 
+.official-badge {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 32px;
+  height: auto;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
 .city-card h3 {
   font-family: var(--font-display);
   font-size: 1.5rem;

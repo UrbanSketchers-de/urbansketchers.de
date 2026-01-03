@@ -36,6 +36,7 @@ title: Urban Sketchers in Deutschland
     .gsub(/[^a-z0-9]+/, '-').gsub(/^-|-$/, '')
 %>
 <article class="city-card" id="city-<%= slug %>" data-city="<%= city[:city].downcase %>" data-slug="<%= slug %>" data-official="<%= city[:is_official] ? '1' : '' %>" data-facebook="<%= city[:facebook] && !city[:facebook].empty? ? '1' : '' %>" data-instagram="<%= city[:instagram] && !city[:instagram].empty? ? '1' : '' %>" data-bluesky="<%= city[:bluesky] && !city[:bluesky].empty? ? '1' : '' %>" data-whatsapp="<%= city[:whatsapp] && !city[:whatsapp].empty? ? '1' : '' %>">
+<% if city[:is_official] %><img src="/usk-logo.png" alt="Offizielles Chapter" class="official-badge"><% end %>
   <h3><%= city[:city] %></h3>
   <p class="description"><%= city[:description] %></p>
   <div class="social-links">
