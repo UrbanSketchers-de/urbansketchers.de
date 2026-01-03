@@ -37,13 +37,25 @@ jobs:
             }
 
             const city = parseField(body, 'Stadt');
+            const lat = parseField(body, 'Breitengrad \\(lat\\)');
+            const lon = parseField(body, 'Längengrad \\(lon\\)');
+            const isOfficialRaw = parseField(body, 'Offizielles Chapter\\?');
+            const isOfficial = isOfficialRaw === 'Ja' ? '1' : '';
             const description = parseField(body, 'Treffpunkt & Zeiten');
+            const website = parseField(body, 'Website');
+            const email = parseField(body, 'E-Mail');
             const facebook = parseField(body, 'Facebook');
             const instagram = parseField(body, 'Instagram');
+            const bluesky = parseField(body, 'Bluesky');
             const whatsapp = parseField(body, 'WhatsApp');
 
             if (!city) {
               console.log('No city found in issue');
+              return;
+            }
+
+            if (isNewCity && (!lat || !lon)) {
+              console.log('Missing coordinates for new city');
               return;
             }
 
@@ -88,9 +100,10 @@ jobs:
               return result;
             }
 
+            // CSV columns: city,lat,lon,is_official,website,email,facebook,instagram,bluesky,whatsapp,description
             if (isNewCity) {
               // Add new city
-              const newLine = [city, facebook, instagram, whatsapp, description].map(escapeCSV).join(',');
+              const newLine = [city, lat, lon, isOfficial, website, email, facebook, instagram, bluesky, whatsapp, description].map(escapeCSV).join(',');
               dataLines.push(newLine);
               // Sort alphabetically by city name
               dataLines.sort((a, b) => {
@@ -106,11 +119,21 @@ jobs:
                 if (fields[0].toLowerCase() === city.toLowerCase()) {
                   found = true;
                   // Update only non-empty fields, handle "entfernen"
-                  const newFacebook = facebook === 'entfernen' ? '' : (facebook || fields[1]);
-                  const newInstagram = instagram === 'entfernen' ? '' : (instagram || fields[2]);
-                  const newWhatsapp = whatsapp === 'entfernen' ? '' : (whatsapp || fields[3]);
-                  const newDescription = description || fields[4];
-                  return [fields[0], newFacebook, newInstagram, newWhatsapp, newDescription].map(escapeCSV).join(',');
+                  const updateField = (newVal, oldVal) => {
+                    if (newVal === 'entfernen') return '';
+                    return newVal || oldVal || '';
+                  };
+                  const newLat = lat || fields[1];
+                  const newLon = lon || fields[2];
+                  const newIsOfficial = isOfficialRaw ? isOfficial : fields[3];
+                  const newWebsite = updateField(website, fields[4]);
+                  const newEmail = updateField(email, fields[5]);
+                  const newFacebook = updateField(facebook, fields[6]);
+                  const newInstagram = updateField(instagram, fields[7]);
+                  const newBluesky = updateField(bluesky, fields[8]);
+                  const newWhatsapp = updateField(whatsapp, fields[9]);
+                  const newDescription = updateField(description, fields[10]);
+                  return [fields[0], newLat, newLon, newIsOfficial, newWebsite, newEmail, newFacebook, newInstagram, newBluesky, newWhatsapp, newDescription].map(escapeCSV).join(',');
                 }
                 return line;
               });
