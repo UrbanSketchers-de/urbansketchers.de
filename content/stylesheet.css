@@ -164,6 +164,8 @@ main > p {
 
 .browse-list {
   order: 3;
+  min-width: 0;
+  overflow: hidden;
 }
 
 #city-search {
@@ -436,7 +438,7 @@ main > p {
 
 .cities {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.25rem;
 }
 
@@ -462,6 +464,8 @@ main > p {
   display: flex;
   flex-direction: column;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  min-width: 0;
+  max-width: 100%;
 }
 
 .city-card::before {
@@ -506,6 +510,8 @@ main > p {
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: auto;
+  min-width: 0;
+  width: 100%;
 }
 
 .btn {
@@ -520,6 +526,7 @@ main > p {
   text-decoration: none;
   transition: transform 0.1s ease, box-shadow 0.1s ease;
   border: 2px solid transparent;
+  flex: 0 0 auto;
 }
 
 .btn:hover {
