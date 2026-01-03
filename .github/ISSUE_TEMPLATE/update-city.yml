@@ -61,7 +61,7 @@ body:
     id: email
     attributes:
       label: E-Mail
-      description: Neue E-Mail (leer = unverändert, "entfernen" = löschen)
+      description: "Neue E-Mail (leer = unverändert, \"entfernen\" = löschen), auch mit Name: Max Mustermann <kontakt@example.de>"
       placeholder: kontakt@example.de
 
   - type: input

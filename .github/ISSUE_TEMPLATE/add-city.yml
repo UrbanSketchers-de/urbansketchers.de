@@ -64,7 +64,7 @@ body:
     id: email
     attributes:
       label: E-Mail
-      description: Kontakt-E-Mail (optional)
+      description: "Kontakt-E-Mail (optional), auch mit Name: Max Mustermann <kontakt@example.de>"
       placeholder: kontakt@example.de
 
   - type: input

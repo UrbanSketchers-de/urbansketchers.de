@@ -28,7 +28,7 @@ Alle Städte-Daten liegen in einer einfachen CSV-Datei:
 | `lon` | Längengrad für die Karte | `8.5325` |
 | `is_official` | Offizielles USk Chapter? (1 = ja, leer = nein) | `1` |
 | `website` | URL zur eigenen Website (optional) | `www.example.de` |
-| `email` | Kontakt-E-Mail (optional) | `kontakt@example.de` |
+| `email` | Kontakt-E-Mail (optional), auch mit Name: `Name <email>` | `kontakt@example.de` |
 | `facebook` | Link zur Facebook-Gruppe (optional) | `https://facebook.com/groups/...` |
 | `instagram` | Instagram-Handle ohne URL (optional) | `@usk_bielefeld` |
 | `bluesky` | Bluesky-Handle (optional) | `@usk.bsky.social` |
