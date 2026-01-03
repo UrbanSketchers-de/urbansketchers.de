@@ -43,11 +43,11 @@ title: Urban Sketchers in Deutschland
   <p class="description"><%= city[:description] %></p>
   <div class="social-links">
 <% if city[:website] && !city[:website].empty? %>
-    <a href="<%= city[:website].start_with?('http') ? city[:website] : 'https://' + city[:website] %>" class="btn btn-website" target="_blank" rel="noopener">Website</a>
+    <a href="<%= city[:website].start_with?('http') ? city[:website] : 'https://' + city[:website] %>" class="btn btn-website" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 15L20 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 9L20 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.0004 20.8182L11.2862 21.5181C11.4742 21.7101 11.7317 21.8182 12.0004 21.8182C12.2691 21.8182 12.5265 21.7101 12.7146 21.5181L12.0004 20.8182ZM12.0004 3.18188L12.7146 2.48198C12.5265 2.29005 12.2691 2.18188 12.0004 2.18188C11.7317 2.18188 11.4742 2.29005 11.2861 2.48198L12.0004 3.18188ZM14.6004 12.0001C14.6004 15.1611 13.3373 18.0251 11.2862 20.1183L12.7146 21.5181C15.1173 19.0662 16.6004 15.7053 16.6004 12.0001H14.6004ZM11.2861 3.88178C13.3373 5.97501 14.6004 8.83903 14.6004 12.0001H16.6004C16.6004 8.29478 15.1173 4.93389 12.7146 2.48198L11.2861 3.88178ZM9.40039 12.0001C9.40039 8.83903 10.6634 5.97501 12.7146 3.88178L11.2861 2.48198C8.88347 4.93389 7.40039 8.29478 7.40039 12.0001H9.40039ZM12.7146 20.1183C10.6634 18.0251 9.40039 15.1611 9.40039 12.0001H7.40039C7.40039 15.7053 8.88348 19.0662 11.2862 21.5181L12.7146 20.1183Z" fill="currentColor"/></svg> Website</a>
 <% end %>
 <% if city[:email] && !city[:email].empty? %>
 <%   email_addr = city[:email] =~ /<(.+)>/ ? $1 : city[:email] %>
-    <a href="mailto:<%= email_addr %>" class="btn btn-email">E-Mail</a>
+    <a href="mailto:<%= encode_email(email_addr) %>" class="btn btn-email"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 7.00005L10.2 11.65C11.2667 12.45 12.7333 12.45 13.8 11.65L20 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> E-Mail</a>
 <% end %>
 <% if city[:facebook] && !city[:facebook].empty? %>
     <a href="<%= city[:facebook] %>" class="btn btn-facebook" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32" fill="currentColor"><path d="M16,2c-7.732,0-14,6.268-14,14,0,6.566,4.52,12.075,10.618,13.588v-9.31h-2.887v-4.278h2.887v-1.843c0-4.765,2.156-6.974,6.835-6.974,.887,0,2.417,.174,3.043,.348v3.878c-.33-.035-.904-.052-1.617-.052-2.296,0-3.183,.87-3.183,3.13v1.513h4.573l-.786,4.278h-3.787v9.619c6.932-.837,12.304-6.74,12.304-13.897,0-7.732-6.268-14-14-14Z"></path></svg> Facebook</a>
@@ -78,6 +78,9 @@ title: Urban Sketchers in Deutschland
     .gsub(/[äÄ]/, 'ae').gsub(/[öÖ]/, 'oe').gsub(/[üÜ]/, 'ue').gsub(/ß/, 'ss')
     .gsub(/[^a-z0-9]+/, '-').gsub(/^-|-$/, '')
   desc_escaped = (city[:description] || '').gsub('"', '&quot;').gsub("'", "&#39;")
+  raw_email = city[:email] || ''
+  email_addr = raw_email =~ /<(.+)>/ ? $1 : raw_email
+  encoded_email = email_addr.empty? ? '' : encode_email(email_addr)
 %>
     {
       name: "<%= city[:city] %>",
@@ -86,7 +89,7 @@ title: Urban Sketchers in Deutschland
       slug: "<%= slug %>",
       description: "<%= desc_escaped %>",
       website: "<%= city[:website] || '' %>",
-      email: "<%= city[:email] || '' %>",
+      email: "<%= encoded_email %>",
       facebook: "<%= city[:facebook] || '' %>",
       instagram: "<%= city[:instagram] || '' %>",
       bluesky: "<%= city[:bluesky] || '' %>",
@@ -98,11 +101,9 @@ title: Urban Sketchers in Deutschland
 
   const createPopupContent = ({ name, description, website, email, facebook, instagram, bluesky, whatsapp }) => {
     const websiteUrl = website && (website.startsWith('http') ? website : 'https://' + website);
-    const emailMatch = email && email.match(/<(.+)>/);
-    const emailAddr = emailMatch ? emailMatch[1] : email;
     const links = [
       website && `<a href="${websiteUrl}" class="popup-btn popup-web" target="_blank" rel="noopener">Website</a>`,
-      email && `<a href="mailto:${emailAddr}" class="popup-btn popup-email">E-Mail</a>`,
+      email && `<a href="mailto:${email}" class="popup-btn popup-email">E-Mail</a>`,
       facebook && `<a href="${facebook}" class="popup-btn popup-fb" target="_blank" rel="noopener">Facebook</a>`,
       instagram && `<a href="https://instagram.com/${instagram.replace(/^@/, '')}" class="popup-btn popup-ig" target="_blank" rel="noopener">Instagram</a>`,
       bluesky && `<a href="https://bsky.app/profile/${bluesky.replace(/^@/, '')}" class="popup-btn popup-bs" target="_blank" rel="noopener">Bluesky</a>`,
