@@ -264,14 +264,9 @@ main > p {
     grid-column: 3 / content-end;
     grid-row: 3;
     margin-right: 0.5rem;
-    flex-direction: row;
-    align-items: center;
   }
 
   #city-search {
-    width: auto;
-    flex: 1;
-    margin-bottom: 0;
     position: static;
     box-shadow: none;
   }
