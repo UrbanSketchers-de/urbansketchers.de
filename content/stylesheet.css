@@ -235,6 +235,39 @@ main > p {
   display: none;
 }
 
+.segmented-control {
+  display: inline-flex;
+  border: 2px solid var(--ink);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.segmented-control label {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  border-right: 1px solid var(--ink);
+}
+
+.segmented-control label:last-child {
+  border-right: none;
+}
+
+.segmented-control label:hover {
+  background: var(--card-dark);
+}
+
+.segmented-control label:has(input:checked) {
+  background: var(--ink);
+  color: #fff;
+}
+
+.segmented-control input {
+  display: none;
+}
+
 #map {
   width: 100%;
   height: 35vh;

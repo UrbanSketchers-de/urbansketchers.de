@@ -13,6 +13,11 @@ title: Urban Sketchers in Deutschland
   <div class="search-filters">
     <input type="search" id="city-search" placeholder="Stadt suchen…" autocomplete="off" autofocus>
     <div class="filters">
+      <div class="segmented-control" id="official-filter">
+        <label><input type="radio" name="official" value="all" checked> Alle</label>
+        <label><input type="radio" name="official" value="official"> Offiziell</label>
+        <label><input type="radio" name="official" value="unofficial"> Inoffiziell</label>
+      </div>
       <label class="filter-chip"><input type="checkbox" value="facebook"> Facebook</label>
       <label class="filter-chip"><input type="checkbox" value="instagram"> Instagram</label>
       <label class="filter-chip"><input type="checkbox" value="bluesky"> Bluesky</label>
@@ -30,7 +35,7 @@ title: Urban Sketchers in Deutschland
     .gsub(/[äÄ]/, 'ae').gsub(/[öÖ]/, 'oe').gsub(/[üÜ]/, 'ue').gsub(/ß/, 'ss')
     .gsub(/[^a-z0-9]+/, '-').gsub(/^-|-$/, '')
 %>
-<article class="city-card" id="city-<%= slug %>" data-city="<%= city[:city].downcase %>" data-slug="<%= slug %>" data-facebook="<%= city[:facebook] && !city[:facebook].empty? ? '1' : '' %>" data-instagram="<%= city[:instagram] && !city[:instagram].empty? ? '1' : '' %>" data-bluesky="<%= city[:bluesky] && !city[:bluesky].empty? ? '1' : '' %>" data-whatsapp="<%= city[:whatsapp] && !city[:whatsapp].empty? ? '1' : '' %>">
+<article class="city-card" id="city-<%= slug %>" data-city="<%= city[:city].downcase %>" data-slug="<%= slug %>" data-official="<%= city[:is_official] ? '1' : '' %>" data-facebook="<%= city[:facebook] && !city[:facebook].empty? ? '1' : '' %>" data-instagram="<%= city[:instagram] && !city[:instagram].empty? ? '1' : '' %>" data-bluesky="<%= city[:bluesky] && !city[:bluesky].empty? ? '1' : '' %>" data-whatsapp="<%= city[:whatsapp] && !city[:whatsapp].empty? ? '1' : '' %>">
   <h3><%= city[:city] %></h3>
   <p class="description"><%= city[:description] %></p>
   <div class="social-links">
@@ -126,15 +131,20 @@ title: Urban Sketchers in Deutschland
 
   const searchInput = document.getElementById('city-search');
   const filterCheckboxes = document.querySelectorAll('.filters input[type="checkbox"]');
+  const officialRadios = document.querySelectorAll('#official-filter input[type="radio"]');
 
   const applyFilters = () => {
     const query = searchInput.value.toLowerCase();
     const activeFilters = [...filterCheckboxes].filter(cb => cb.checked).map(cb => cb.value);
+    const officialFilter = document.querySelector('#official-filter input:checked')?.value || 'all';
 
     for (const card of document.querySelectorAll('.city-card')) {
       const matchesSearch = card.dataset.city.includes(query);
       const matchesFilters = activeFilters.length === 0 || activeFilters.every(f => card.dataset[f] === '1');
-      const matches = matchesSearch && matchesFilters;
+      const matchesOfficial = officialFilter === 'all' ||
+        (officialFilter === 'official' && card.dataset.official === '1') ||
+        (officialFilter === 'unofficial' && card.dataset.official !== '1');
+      const matches = matchesSearch && matchesFilters && matchesOfficial;
 
       card.style.display = matches ? '' : 'none';
 
@@ -148,6 +158,7 @@ title: Urban Sketchers in Deutschland
 
   searchInput.addEventListener('input', applyFilters);
   filterCheckboxes.forEach(cb => cb.addEventListener('change', applyFilters));
+  officialRadios.forEach(r => r.addEventListener('change', applyFilters));
 
   for (const card of document.querySelectorAll('.city-card')) {
     card.style.cursor = 'pointer';
