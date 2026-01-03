@@ -511,6 +511,7 @@ main > p {
 .btn {
   display: inline-flex;
   align-items: center;
+  gap: 0.4em;
   padding: 0.45rem 1rem;
   font-size: 0.75rem;
   font-weight: 700;
