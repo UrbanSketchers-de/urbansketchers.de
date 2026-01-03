@@ -9,7 +9,6 @@
     <script src="/lib/leaflet/leaflet.js"></script>
   </head>
   <body>
-    <%= File.read('content/icons.svg') %>
     <main>
       <%= yield %>
     </main>
@@ -24,5 +23,6 @@
       <p>Impressum: Christian Tietze, Dostalstr. 18, 33647 Bielefeld &bull; <a href="mailto:christian.tietze@gmail.com">Email</a></p>
       <p>Datenschutz: Diese Seite sammelt keine Daten. Nur normale Server-Logs. Kartendaten von <a href="https://osmfoundation.org/wiki/Privacy_Policy">OpenStreetMap</a>.</p>
     </footer>
+    <%= File.read('content/icons.svg') %>
   </body>
 </html>
