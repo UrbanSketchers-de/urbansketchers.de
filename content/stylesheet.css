@@ -487,10 +487,9 @@ main > p {
 }
 
 .city-card h3 {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-size: 1.5rem;
-  font-weight: 900;
-  text-transform: uppercase;
+  font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--ink);
   margin: 0 0 0.5rem 0;
