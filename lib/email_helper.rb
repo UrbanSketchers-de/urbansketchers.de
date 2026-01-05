@@ -10,9 +10,9 @@ module EmailHelper
       url = $2
       if url.start_with?('mailto:')
         email = url.sub('mailto:', '')
-        %Q{<a href="mailto:#{encode_email(email)}">#{link_text}</a>}
+        %Q{<a href='mailto:#{encode_email(email)}'>#{link_text}</a>}
       else
-        %Q{<a href="#{url}" target="_blank" rel="noopener">#{link_text}</a>}
+        %Q{<a href='#{url}' target='_blank' rel='noopener'>#{link_text}</a>}
       end
     end
   end
