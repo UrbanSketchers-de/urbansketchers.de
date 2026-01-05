@@ -6,7 +6,14 @@ module EmailHelper
   def render_markdown_links(text)
     return '' if text.nil? || text.empty?
     text.gsub(/\[([^\]]+)\]\(([^)]+)\)/) do
-      %Q{<a href="#{$2}" target="_blank" rel="noopener">#{$1}</a>}
+      link_text = $1
+      url = $2
+      if url.start_with?('mailto:')
+        email = url.sub('mailto:', '')
+        %Q{<a href="mailto:#{encode_email(email)}">#{link_text}</a>}
+      else
+        %Q{<a href="#{url}" target="_blank" rel="noopener">#{link_text}</a>}
+      end
     end
   end
 end
