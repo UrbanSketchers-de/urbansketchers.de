@@ -78,7 +78,7 @@ title: Urban Sketchers in Deutschland
     .gsub(/[äÄ]/, 'ae').gsub(/[öÖ]/, 'oe').gsub(/[üÜ]/, 'ue').gsub(/ß/, 'ss')
     .gsub(/[^a-z0-9]+/, '-').gsub(/^-|-$/, '')
   desc_html = render_markdown_links(city[:description] || '')
-  desc_escaped = desc_html.gsub('"', '&quot;').gsub("'", "&#39;")
+  desc_escaped = desc_html.gsub('"', '&quot;')
   raw_email = city[:email] || ''
   email_addr = raw_email =~ /<(.+)>/ ? $1 : raw_email
   encoded_email = email_addr.empty? ? '' : encode_email(email_addr)
