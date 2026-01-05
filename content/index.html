@@ -114,6 +114,7 @@ title: Urban Sketchers in Deutschland
 
     return `
       <div class="map-popup${official ? ' official' : ''}">
+        ${official ? '<img src="/usk-logo.png" alt="" class="popup-badge">' : ''}
         <strong>${name}</strong>
         <p>${description}</p>
         <div class="popup-links">${links}</div>

@@ -382,7 +382,16 @@ main > p {
 }
 
 .map-popup {
+  position: relative;
   padding: 1rem 1.25rem;
+}
+
+.popup-badge {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 24px;
+  height: auto;
 }
 
 .map-popup strong {
