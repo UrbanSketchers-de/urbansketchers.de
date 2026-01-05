@@ -1,6 +1,6 @@
 :root {
   --font-display: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-body: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
   --bg: #ffffff;
   --card: #faf8f3;
   --card-dark: #f0ebe0;
