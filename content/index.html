@@ -37,7 +37,7 @@ title: Urban Sketchers in Deutschland
     .gsub(/[äÄ]/, 'ae').gsub(/[öÖ]/, 'oe').gsub(/[üÜ]/, 'ue').gsub(/ß/, 'ss')
     .gsub(/[^a-z0-9]+/, '-').gsub(/^-|-$/, '')
 %>
-<article class="city-card" id="city-<%= slug %>" data-city="<%= city[:city].downcase %>" data-slug="<%= slug %>" data-official="<%= city[:is_official] ? '1' : '' %>" data-website="<%= city[:website] && !city[:website].empty? ? '1' : '' %>" data-email="<%= city[:email] && !city[:email].empty? ? '1' : '' %>" data-facebook="<%= city[:facebook] && !city[:facebook].empty? ? '1' : '' %>" data-instagram="<%= city[:instagram] && !city[:instagram].empty? ? '1' : '' %>" data-bluesky="<%= city[:bluesky] && !city[:bluesky].empty? ? '1' : '' %>" data-whatsapp="<%= city[:whatsapp] && !city[:whatsapp].empty? ? '1' : '' %>">
+<article class="city-card<%= city[:is_official] ? ' official' : '' %>" id="city-<%= slug %>" data-city="<%= city[:city].downcase %>" data-slug="<%= slug %>" data-official="<%= city[:is_official] ? '1' : '' %>" data-website="<%= city[:website] && !city[:website].empty? ? '1' : '' %>" data-email="<%= city[:email] && !city[:email].empty? ? '1' : '' %>" data-facebook="<%= city[:facebook] && !city[:facebook].empty? ? '1' : '' %>" data-instagram="<%= city[:instagram] && !city[:instagram].empty? ? '1' : '' %>" data-bluesky="<%= city[:bluesky] && !city[:bluesky].empty? ? '1' : '' %>" data-whatsapp="<%= city[:whatsapp] && !city[:whatsapp].empty? ? '1' : '' %>">
 <% if city[:is_official] %><img src="/usk-logo.png" alt="Offizielles Chapter" class="official-badge"><% end %>
   <h3><%= city[:city] %></h3>
   <p class="description"><%= render_markdown_links(city[:description]) %></p>
@@ -94,13 +94,14 @@ title: Urban Sketchers in Deutschland
       facebook: "<%= city[:facebook] || '' %>",
       instagram: "<%= city[:instagram] || '' %>",
       bluesky: "<%= city[:bluesky] || '' %>",
-      whatsapp: "<%= city[:whatsapp] || '' %>"
+      whatsapp: "<%= city[:whatsapp] || '' %>",
+      official: <%= city[:is_official] ? 'true' : 'false' %>
     },
 <% end %>
 <% end %>
   ];
 
-  const createPopupContent = ({ name, description, website, email, facebook, instagram, bluesky, whatsapp }) => {
+  const createPopupContent = ({ name, description, website, email, facebook, instagram, bluesky, whatsapp, official }) => {
     const websiteUrl = website && (website.startsWith('http') ? website : 'https://' + website);
     const links = [
       website && `<a href="${websiteUrl}" class="popup-btn popup-web" target="_blank" rel="noopener">Website</a>`,
@@ -112,7 +113,7 @@ title: Urban Sketchers in Deutschland
     ].filter(Boolean).join('');
 
     return `
-      <div class="map-popup">
+      <div class="map-popup${official ? ' official' : ''}">
         <strong>${name}</strong>
         <p>${description}</p>
         <div class="popup-links">${links}</div>

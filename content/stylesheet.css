@@ -386,9 +386,9 @@ main > p {
 }
 
 .map-popup strong {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-size: 1.4rem;
-  text-transform: uppercase;
+  font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--ink);
   display: block;
@@ -494,6 +494,11 @@ main > p {
   color: var(--ink);
   margin: 0 0 0.5rem 0;
   line-height: 1.1;
+}
+
+.city-card.official h3,
+.map-popup.official strong {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
 }
 
 .city-card .description {
