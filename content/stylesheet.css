@@ -149,6 +149,37 @@ main > p {
   font-weight: 400;
 }
 
+aside.announcement {
+  background: #fef9e7;
+  border: 2px solid #f0d86e;
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  max-width: 720px;
+}
+
+aside.announcement strong {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 0.35rem;
+}
+
+aside.announcement p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--ink-light);
+}
+
+aside.announcement a {
+  font-weight: 600;
+}
+
+@media (min-width: 900px) {
+  main > aside.announcement {
+    grid-column: content-start / content-end;
+    grid-row: 3;
+  }
+}
+
 .browse-layout {
   display: flex;
   flex-direction: column;
@@ -297,7 +328,7 @@ main > p {
 
   .search-filters {
     grid-column: 3 / content-end;
-    grid-row: 3;
+    grid-row: 4;
     margin-right: 0.5rem;
   }
 
@@ -308,7 +339,7 @@ main > p {
 
   .browse-map {
     grid-column: content-start;
-    grid-row: 4;
+    grid-row: 5;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
@@ -320,7 +351,7 @@ main > p {
 
   .browse-list {
     grid-column: 3 / content-end;
-    grid-row: 4;
+    grid-row: 5;
     min-width: 0;
     max-height: calc(100vh - 8rem);
     overflow-y: auto;
