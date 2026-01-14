@@ -11,6 +11,7 @@
   --accent-pink: #d62976;
   --accent-blue: #0077b6;
   --accent-teal: #00b4d8;
+  --map-inset: 1rem;
 }
 
 * {
@@ -176,7 +177,6 @@ aside.announcement a {
 @media (min-width: 900px) {
   main > aside.announcement {
     grid-column: content-start / content-end;
-    grid-row: 3;
   }
 }
 
@@ -323,13 +323,24 @@ aside.announcement a {
 
 @media (min-width: 900px) {
   .browse-layout {
-    display: contents;
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    gap: 1.5rem;
   }
 
   .search-filters {
-    grid-column: 3 / content-end;
-    grid-row: 4;
-    margin-right: 0.5rem;
+    grid-column: 2;
+    grid-row: 1;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 10;
+    padding-top: var(--map-inset);
+    padding-bottom: 0.5rem;
+    padding-inline: 1rem;
+    margin-top: calc(-1 * var(--map-inset));
+    margin-inline: -1rem;
   }
 
   #city-search {
@@ -338,24 +349,21 @@ aside.announcement a {
   }
 
   .browse-map {
-    grid-column: content-start;
-    grid-row: 5;
+    grid-column: 1;
+    grid-row: 1 / -1;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
-    height: calc(100vh - 12rem);
-    max-height: 700px;
+    height: calc(100vh - 2 * var(--map-inset));
     position: sticky;
-    top: 2rem;
+    top: var(--map-inset);
+    align-self: start;
   }
 
   .browse-list {
-    grid-column: 3 / content-end;
-    grid-row: 5;
+    grid-column: 2;
+    grid-row: 2;
     min-width: 0;
-    max-height: calc(100vh - 8rem);
-    overflow-y: auto;
-    overflow-x: visible;
     padding: 0.5rem;
     margin: -0.5rem;
     margin-right: 0;
