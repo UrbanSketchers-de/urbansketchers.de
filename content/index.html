@@ -41,10 +41,11 @@ title: Urban Sketchers in Deutschland
   slug = city[:city].downcase
     .gsub(/[äÄ]/, 'ae').gsub(/[öÖ]/, 'oe').gsub(/[üÜ]/, 'ue').gsub(/ß/, 'ss')
     .gsub(/[^a-z0-9]+/, '-').gsub(/^-|-$/, '')
+  logo_path = "/logos/#{slug}.webp"
+  has_logo = @items[logo_path]
 %>
-<article class="city-card<%= city[:is_official] ? ' official' : '' %>" id="city-<%= slug %>" data-city="<%= city[:city].downcase %>" data-slug="<%= slug %>" data-official="<%= city[:is_official] ? '1' : '' %>" data-website="<%= city[:website] && !city[:website].empty? ? '1' : '' %>" data-email="<%= city[:email] && !city[:email].empty? ? '1' : '' %>" data-facebook="<%= city[:facebook] && !city[:facebook].empty? ? '1' : '' %>" data-instagram="<%= city[:instagram] && !city[:instagram].empty? ? '1' : '' %>" data-bluesky="<%= city[:bluesky] && !city[:bluesky].empty? ? '1' : '' %>" data-whatsapp="<%= city[:whatsapp] && !city[:whatsapp].empty? ? '1' : '' %>">
-<% if city[:is_official] %><img src="/usk-logo.png" alt="Offizielles Chapter" class="official-badge"><% end %>
-  <h3><%= city[:city] %></h3>
+<article class="city-card<%= city[:is_official] ? ' official' : '' %><%= has_logo ? ' has-logo' : '' %>" id="city-<%= slug %>" data-city="<%= city[:city].downcase %>" data-slug="<%= slug %>" data-official="<%= city[:is_official] ? '1' : '' %>" data-website="<%= city[:website] && !city[:website].empty? ? '1' : '' %>" data-email="<%= city[:email] && !city[:email].empty? ? '1' : '' %>" data-facebook="<%= city[:facebook] && !city[:facebook].empty? ? '1' : '' %>" data-instagram="<%= city[:instagram] && !city[:instagram].empty? ? '1' : '' %>" data-bluesky="<%= city[:bluesky] && !city[:bluesky].empty? ? '1' : '' %>" data-whatsapp="<%= city[:whatsapp] && !city[:whatsapp].empty? ? '1' : '' %>"<%= has_logo ? " style=\"--logo-url: url(#{logo_path})\"" : '' %>>
+<h3><%= city[:city] %><% if city[:is_official] %> <img src="/usk-logo.png" alt="Offizielles USk Chapter" title="Offizielles Urban Sketchers Chapter" class="official-badge"><% end %></h3>
   <p class="description"><%= render_markdown_links(city[:description]) %></p>
   <div class="social-links">
 <% if city[:website] && !city[:website].empty? %>
