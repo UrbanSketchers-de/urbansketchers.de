@@ -572,10 +572,33 @@ aside.announcement a {
 .social-links {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.5rem;
   margin-top: auto;
   min-width: 0;
   width: 100%;
+}
+
+.city-card header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.city-card header h3 {
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.founded {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--ink-faint);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .btn {

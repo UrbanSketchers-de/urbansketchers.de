@@ -45,7 +45,17 @@ title: Urban Sketchers in Deutschland
   has_logo = @items[logo_path]
 %>
 <article class="city-card<%= city[:is_official] ? ' official' : '' %><%= has_logo ? ' has-logo' : '' %>" id="city-<%= slug %>" data-city="<%= city[:city].downcase %>" data-slug="<%= slug %>" data-official="<%= city[:is_official] ? '1' : '' %>" data-website="<%= city[:website] && !city[:website].empty? ? '1' : '' %>" data-email="<%= city[:email] && !city[:email].empty? ? '1' : '' %>" data-facebook="<%= city[:facebook] && !city[:facebook].empty? ? '1' : '' %>" data-instagram="<%= city[:instagram] && !city[:instagram].empty? ? '1' : '' %>" data-bluesky="<%= city[:bluesky] && !city[:bluesky].empty? ? '1' : '' %>" data-whatsapp="<%= city[:whatsapp] && !city[:whatsapp].empty? ? '1' : '' %>"<%= has_logo ? " style=\"--logo-url: url(#{logo_path})\"" : '' %>>
+<header>
 <h3><%= city[:city] %><% if city[:is_official] %> <img src="/usk-logo.png" alt="Offizielles USk Chapter" title="Offizielles Urban Sketchers Chapter" class="official-badge"><% end %></h3>
+<% if city[:founded] && !city[:founded].empty? %>
+<%
+  founded_year = city[:founded][0..3]
+  founded_full = city[:founded].length > 4
+  founded_tooltip = founded_full ? format_german_date(city[:founded]) : nil
+%>
+<time datetime="<%= city[:founded] %>" class="founded"<%= founded_tooltip ? " title=\"Gegründet am #{founded_tooltip}\"" : '' %>>Seit <%= founded_year %></time>
+<% end %>
+</header>
   <p class="description"><%= render_markdown_links(city[:description]) %></p>
   <div class="social-links">
 <% if city[:website] && !city[:website].empty? %>
