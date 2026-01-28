@@ -24,7 +24,9 @@ class CitiesDataSource < Nanoc::DataSource
           instagram: row['instagram'],
           bluesky: row['bluesky'],
           whatsapp: row['whatsapp'],
-          description: row['description']
+          description: row['description'],
+          founded: row['founded'],
+          chapter_date: row['chapter_date']
         },
         "/#{slugify(row['city'])}"
       )

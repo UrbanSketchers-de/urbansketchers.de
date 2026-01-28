@@ -16,4 +16,14 @@ module EmailHelper
       end
     end
   end
+
+  GERMAN_MONTHS = %w[Januar Februar März April Mai Juni Juli August September Oktober November Dezember].freeze
+
+  def format_german_date(iso_date)
+    return nil unless iso_date =~ /^(\d{4})-(\d{2})-(\d{2})$/
+    day = $3.to_i
+    month = GERMAN_MONTHS[$2.to_i - 1]
+    year = $1
+    "#{day}. #{month} #{year}"
+  end
 end
