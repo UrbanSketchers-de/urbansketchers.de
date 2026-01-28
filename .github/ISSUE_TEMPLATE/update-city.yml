@@ -92,6 +92,20 @@ body:
       description: Neuer Link (leer = unverändert, "entfernen" = löschen)
       placeholder: https://chat.whatsapp.com/...
 
+  - type: input
+    id: founded
+    attributes:
+      label: Gründungsdatum
+      description: Neues Datum (leer = unverändert, "entfernen" = löschen). Format YYYY oder YYYY-MM-DD
+      placeholder: "z.B. 2015 oder 2015-06-04"
+
+  - type: input
+    id: chapter_date
+    attributes:
+      label: Chapter-Anerkennung
+      description: Neues Datum (leer = unverändert, "entfernen" = löschen). Format YYYY oder YYYY-MM-DD
+      placeholder: "z.B. 2018 oder 2018-03-15"
+
   - type: textarea
     id: reason
     attributes:

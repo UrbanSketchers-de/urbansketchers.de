@@ -34,6 +34,8 @@ Alle Städte-Daten liegen in einer einfachen CSV-Datei:
 | `bluesky` | Bluesky-Handle (optional) | `@usk.bsky.social` |
 | `whatsapp` | Einladungslink zur WhatsApp-Gruppe (optional) | `https://chat.whatsapp.com/...` |
 | `description` | Wann und wo ihr euch trefft (optional) | `Treffen jeden Sonntag, 11-14 Uhr` |
+| `founded` | Gründungsdatum der Gruppe (optional), Format: `YYYY` oder `YYYY-MM-DD` | `2015-06-04` |
+| `chapter_date` | Datum der offiziellen Chapter-Anerkennung (optional), Format: `YYYY` oder `YYYY-MM-DD` | `2018` |
 
 💡 **Koordinaten finden:** Gib deine Stadt auf [latlong.net](https://www.latlong.net/) ein — die Koordinaten werden direkt angezeigt und können kopiert werden.
 

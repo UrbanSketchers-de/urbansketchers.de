@@ -95,6 +95,20 @@ body:
       description: Einladungslink zur WhatsApp-Gruppe (optional)
       placeholder: https://chat.whatsapp.com/...
 
+  - type: input
+    id: founded
+    attributes:
+      label: Gründungsdatum
+      description: Wann wurde die Gruppe gegründet? Format YYYY oder YYYY-MM-DD (optional)
+      placeholder: "z.B. 2015 oder 2015-06-04"
+
+  - type: input
+    id: chapter_date
+    attributes:
+      label: Chapter-Anerkennung
+      description: Wann wurde die Gruppe offiziell als Chapter anerkannt? Format YYYY oder YYYY-MM-DD (optional)
+      placeholder: "z.B. 2018 oder 2018-03-15"
+
   - type: checkboxes
     id: confirmation
     attributes:
