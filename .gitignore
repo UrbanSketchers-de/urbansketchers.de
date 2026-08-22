@@ -5,3 +5,6 @@
 output
 tmp
 .env.staging
+
+# local notes, never published
+private.org
