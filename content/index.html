@@ -56,6 +56,9 @@ title: Urban Sketchers in Deutschland
 <time datetime="<%= city[:founded] %>" class="founded"<%= founded_tooltip ? " title=\"Gegründet am #{founded_tooltip}\"" : '' %>>Seit <%= founded_year %></time>
 <% end %>
 </header>
+<% unless city[:deutschlandtreffen].empty? %>
+  <p class="deutschlandtreffen" title="Diese Gruppe hat das Deutschlandtreffen der Urban Sketchers ausgerichtet">Gastgeber Deutschlandtreffen <%= city[:deutschlandtreffen].join(', ') %></p>
+<% end %>
   <p class="description"><%= render_markdown_links(city[:description]) %></p>
   <div class="social-links">
 <% if city[:website] && !city[:website].empty? %>

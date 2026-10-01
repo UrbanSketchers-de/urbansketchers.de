@@ -36,6 +36,7 @@ Alle Städte-Daten liegen in einer einfachen CSV-Datei:
 | `description` | Wann und wo ihr euch trefft (optional) | `Treffen jeden Sonntag, 11-14 Uhr` |
 | `founded` | Gründungsdatum der Gruppe (optional), Format: `YYYY` oder `YYYY-MM-DD` | `2015-06-04` |
 | `chapter_date` | Datum der offiziellen Chapter-Anerkennung (optional), Format: `YYYY` oder `YYYY-MM-DD` | `2018` |
+| `deutschlandtreffen` | Jahre, in denen die Gruppe das Deutschlandtreffen ausgerichtet hat (optional), mehrere mit `;` trennen | `2025;2030` |
 
 💡 **Koordinaten finden:** Gib deine Stadt auf [latlong.net](https://www.latlong.net/) ein — die Koordinaten werden direkt angezeigt und können kopiert werden.
 

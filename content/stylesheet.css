@@ -601,6 +601,12 @@ aside.announcement a {
   flex-shrink: 0;
 }
 
+.deutschlandtreffen {
+  margin: -0.25rem 0 0.5rem;
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+}
+
 .btn {
   display: inline-flex;
   align-items: center;

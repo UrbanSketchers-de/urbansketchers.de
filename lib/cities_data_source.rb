@@ -26,7 +26,8 @@ class CitiesDataSource < Nanoc::DataSource
           whatsapp: row['whatsapp'],
           description: row['description'],
           founded: row['founded'],
-          chapter_date: row['chapter_date']
+          chapter_date: row['chapter_date'],
+          deutschlandtreffen: (row['deutschlandtreffen'] || '').split(';').map(&:strip).reject(&:empty?)
         },
         "/#{slugify(row['city'])}"
       )
