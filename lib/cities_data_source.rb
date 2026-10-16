@@ -24,6 +24,7 @@ class CitiesDataSource < Nanoc::DataSource
           instagram: row['instagram'],
           bluesky: row['bluesky'],
           whatsapp: row['whatsapp'],
+          cara: row['cara'],
           description: row['description'],
           founded: row['founded'],
           chapter_date: row['chapter_date'],

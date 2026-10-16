@@ -96,6 +96,13 @@ body:
       placeholder: https://chat.whatsapp.com/...
 
   - type: input
+    id: cara
+    attributes:
+      label: Cara
+      description: Link zum Cara-Profil (optional)
+      placeholder: https://cara.app/usk_hamburg
+
+  - type: input
     id: founded
     attributes:
       label: Gründungsdatum

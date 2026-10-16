@@ -48,6 +48,7 @@ jobs:
             const instagram = parseField(body, 'Instagram');
             const bluesky = parseField(body, 'Bluesky');
             const whatsapp = parseField(body, 'WhatsApp');
+            const cara = parseField(body, 'Cara');
 
             if (!city) {
               console.log('No city found in issue');
@@ -100,10 +101,10 @@ jobs:
               return result;
             }
 
-            // CSV columns: city,lat,lon,is_official,website,email,facebook,instagram,bluesky,whatsapp,description
+            // CSV columns: city,lat,lon,is_official,website,email,facebook,instagram,bluesky,whatsapp,cara,description,founded,chapter_date,deutschlandtreffen
             if (isNewCity) {
               // Add new city
-              const newLine = [city, lat, lon, isOfficial, website, email, facebook, instagram, bluesky, whatsapp, description].map(escapeCSV).join(',');
+              const newLine = [city, lat, lon, isOfficial, website, email, facebook, instagram, bluesky, whatsapp, cara, description].map(escapeCSV).join(',');
               dataLines.push(newLine);
               // Sort alphabetically by city name
               dataLines.sort((a, b) => {
@@ -132,8 +133,9 @@ jobs:
                   const newInstagram = updateField(instagram, fields[7]);
                   const newBluesky = updateField(bluesky, fields[8]);
                   const newWhatsapp = updateField(whatsapp, fields[9]);
-                  const newDescription = updateField(description, fields[10]);
-                  return [fields[0], newLat, newLon, newIsOfficial, newWebsite, newEmail, newFacebook, newInstagram, newBluesky, newWhatsapp, newDescription].map(escapeCSV).join(',');
+                  const newCara = updateField(cara, fields[10]);
+                  const newDescription = updateField(description, fields[11]);
+                  return [fields[0], newLat, newLon, newIsOfficial, newWebsite, newEmail, newFacebook, newInstagram, newBluesky, newWhatsapp, newCara, newDescription, ...fields.slice(12)].map(escapeCSV).join(',');
                 }
                 return line;
               });

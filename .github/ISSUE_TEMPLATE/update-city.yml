@@ -93,6 +93,13 @@ body:
       placeholder: https://chat.whatsapp.com/...
 
   - type: input
+    id: cara
+    attributes:
+      label: Cara
+      description: Neuer Link (leer = unverändert, "entfernen" = löschen)
+      placeholder: https://cara.app/usk_hamburg
+
+  - type: input
     id: founded
     attributes:
       label: Gründungsdatum

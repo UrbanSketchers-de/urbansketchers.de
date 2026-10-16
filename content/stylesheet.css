@@ -474,6 +474,7 @@ aside.announcement a {
 .popup-ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
 .popup-bs { background: #1185fe; }
 .popup-wa { background: #00a884; }
+.popup-cara { background: #5b4fc4; }
 
 .leaflet-control-attribution {
   font-size: 0.65rem;
@@ -661,6 +662,15 @@ aside.announcement a {
 
 .btn-whatsapp:hover {
   box-shadow: 3px 3px 0 #007a60;
+}
+
+.btn-cara {
+  background: #5b4fc4;
+  color: #fff !important;
+}
+
+.btn-cara:hover {
+  box-shadow: 3px 3px 0 #3e348f;
 }
 
 .btn-website {

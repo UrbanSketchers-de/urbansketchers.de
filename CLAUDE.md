@@ -17,7 +17,7 @@ This is a [Nanoc](https://nanoc.app) static site generator project for listing U
 
 ### Data Flow
 
-1. **City data** lives in `data/cities.csv` (columns: city, lat, lon, is_official, website, email, facebook, instagram, bluesky, whatsapp, description)
+1. **City data** lives in `data/cities.csv` (columns: city, lat, lon, is_official, website, email, facebook, instagram, bluesky, whatsapp, cara, description, founded, chapter_date, deutschlandtreffen)
 2. **Custom data source** (`lib/cities_data_source.rb`) reads the CSV and creates nanoc items under `/cities/*`
 3. **ERB template** (`content/index.html`) iterates over city items with `@items.find_all('/cities/*')`
 4. **Layout** (`layouts/default.html`) wraps content in the page structure
@@ -41,11 +41,12 @@ No external resources (CDNs, Google Fonts, analytics). All assets are self-hoste
 
 Fields with commas must be quoted. Example:
 ```csv
-city,lat,lon,is_official,website,email,facebook,instagram,bluesky,whatsapp,description
-Hamburg,53.5511,9.9937,1,www.example.de,kontakt@example.de,https://facebook.com/groups/...,@usk_hamburg,@usk.bsky.social,https://chat.whatsapp.com/...,"Treffen jeden Sonntag, 11-14 Uhr"
+city,lat,lon,is_official,website,email,facebook,instagram,bluesky,whatsapp,cara,description,founded,chapter_date,deutschlandtreffen
+Hamburg,53.5511,9.9937,1,www.example.de,kontakt@example.de,https://facebook.com/groups/...,@usk_hamburg,@usk.bsky.social,https://chat.whatsapp.com/...,https://cara.app/usk_hamburg,"Treffen jeden Sonntag, 11-14 Uhr",2015-06-04,2018,
 ```
 
 **When changing CSV structure:** Update these files to match:
 - `README.md` (CSV column documentation table)
 - `.github/ISSUE_TEMPLATE/add-city.yml`
 - `.github/ISSUE_TEMPLATE/update-city.yml`
+- `.github/workflows/issue-to-pr.yml` (column order in the CSV writer)

@@ -33,6 +33,7 @@ Alle Städte-Daten liegen in einer einfachen CSV-Datei:
 | `instagram` | Instagram-Handle ohne URL (optional) | `@usk_bielefeld` |
 | `bluesky` | Bluesky-Handle (optional) | `@usk.bsky.social` |
 | `whatsapp` | Einladungslink zur WhatsApp-Gruppe (optional) | `https://chat.whatsapp.com/...` |
+| `cara` | Link zum Cara-Profil (optional) | `https://cara.app/usk_hamburg` |
 | `description` | Wann und wo ihr euch trefft (optional) | `Treffen jeden Sonntag, 11-14 Uhr` |
 | `founded` | Gründungsdatum der Gruppe (optional), Format: `YYYY` oder `YYYY-MM-DD` | `2015-06-04` |
 | `chapter_date` | Datum der offiziellen Chapter-Anerkennung (optional), Format: `YYYY` oder `YYYY-MM-DD` | `2018` |
