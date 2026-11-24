@@ -30,7 +30,7 @@ jobs:
           commit-message: "${{ env.IS_NEW == 'true' && 'Neue Stadt' || 'Aktualisierung' }}: ${{ env.CITY_NAME }}"
           title: "${{ env.IS_NEW == 'true' && 'Neue Stadt' || 'Aktualisierung' }}: ${{ env.CITY_NAME }}"
           body: |
-            Automatisch erstellt aus Issue #${{ github.event.issue.number }}
+            Closes #${{ github.event.issue.number }} (automatisch erstellt)
 
             ${{ github.event.issue.html_url }}
 
