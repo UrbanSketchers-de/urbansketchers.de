@@ -60,7 +60,7 @@ function parseIssueBody(body) {
     lat: parseField(body, 'Breitengrad \\(lat\\)'),
     lon: parseField(body, 'Längengrad \\(lon\\)'),
     isOfficialRaw,
-    isOfficial: isOfficialRaw === 'Ja' ? '1' : '',
+    isOfficial: isOfficialRaw === 'Ja' ? '1' : '0',
     description: parseField(body, 'Treffpunkt & Zeiten'),
     website: parseField(body, 'Website'),
     email: parseField(body, 'E-Mail'),

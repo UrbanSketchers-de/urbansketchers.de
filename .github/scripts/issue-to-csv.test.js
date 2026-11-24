@@ -56,7 +56,7 @@ test('new city writes all columns, with dates normalized', () => {
     labels: ['neue-stadt'],
     body: issueBody({ Stadt: 'Bonn', 'Breitengrad (lat)': '50.73', 'Längengrad (lon)': '7.10', 'Gründungsdatum': 'September 2025', 'Chapter-Anerkennung': '4.6.2026' }),
   });
-  assert.equal(rowOf(result.csv, 'Bonn'), 'Bonn,50.73,7.10,,,,,,,,,,2025-09,2026-06-04,');
+  assert.equal(rowOf(result.csv, 'Bonn'), 'Bonn,50.73,7.10,0,,,,,,,,,2025-09,2026-06-04,');
   assert.deepEqual(result.notes, []);
 });
 
