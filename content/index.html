@@ -49,12 +49,8 @@ title: Urban Sketchers in Deutschland
 <header>
 <h3><%= city[:city] %><% if city[:is_official] %> <img src="/usk-logo.png" alt="Offizielles USk Chapter" title="Offizielles Urban Sketchers Chapter" class="official-badge"><% end %></h3>
 <% if city[:founded] && !city[:founded].empty? %>
-<%
-  founded_year = city[:founded][0..3]
-  founded_full = city[:founded].length > 4
-  founded_tooltip = founded_full ? format_german_date(city[:founded]) : nil
-%>
-<time datetime="<%= city[:founded] %>" class="founded"<%= founded_tooltip ? " title=\"Gegründet am #{founded_tooltip}\"" : '' %>>Seit <%= founded_year %></time>
+<% founded_title = founded_title(city[:founded]) %>
+<time datetime="<%= city[:founded] %>" class="founded"<%= founded_title ? " title=\"#{founded_title}\"" : '' %>>Seit <%= city[:founded][0..3] %></time>
 <% end %>
 </header>
 <% unless city[:deutschlandtreffen].empty? %>
