@@ -50,3 +50,45 @@ test('new city without coordinates is an error', () => {
   const result = applyIssue(CSV, { labels: ['neue-stadt'], body: issueBody({ Stadt: 'Bonn' }) });
   assert.equal(result.error, 'Koordinaten fehlen');
 });
+
+test('new city writes all columns, with dates normalized', () => {
+  const result = applyIssue(CSV, {
+    labels: ['neue-stadt'],
+    body: issueBody({ Stadt: 'Bonn', 'Breitengrad (lat)': '50.73', 'Längengrad (lon)': '7.10', 'Gründungsdatum': 'September 2025', 'Chapter-Anerkennung': '4.6.2026' }),
+  });
+  assert.equal(rowOf(result.csv, 'Bonn'), 'Bonn,50.73,7.10,,,,,,,,,,2025-09,2026-06-04,');
+  assert.deepEqual(result.notes, []);
+});
+
+test('date formats people type are normalized', () => {
+  const cases = {
+    '2015': '2015',
+    '2015-6': '2015-06',
+    '2015-06-04': '2015-06-04',
+    '04.06.2015': '2015-06-04',
+    '4. 6. 2015': '2015-06-04',
+    '6/2015': '2015-06',
+    '06.2015': '2015-06',
+    'Sept. 2025': '2025-09',
+    'März 2026': '2026-03',
+    '4. Juni 2015': '2015-06-04',
+  };
+  const founded = Object.keys(cases).map(input => {
+    const result = applyIssue(CSV, { labels: ['aktualisierung'], body: issueBody({ Stadt: 'Ulm', 'Gründungsdatum': input }) });
+    return rowOf(result.csv, 'Ulm').split(',')[12];
+  });
+  assert.deepEqual(founded, Object.values(cases));
+});
+
+test('unrecognized date leaves the column unchanged and is reported', () => {
+  const csv = CSV.replace('@ulm_usk,,,,,,,', '@ulm_usk,,,,,2012,,');
+  const result = applyIssue(csv, { labels: ['aktualisierung'], body: issueBody({ Stadt: 'Ulm', 'Gründungsdatum': 'Frühjahr 2018', 'Chapter-Anerkennung': '2015-13' }) });
+  assert.equal(rowOf(result.csv, 'Ulm'), 'Ulm,48.4011,9.9876,0,,urbansketchersulm@gmail.com,,@ulm_usk,,,,,2012,,');
+  assert.deepEqual(result.notes, ['Gründungsdatum nicht erkannt: "Frühjahr 2018"', 'Chapter-Anerkennung nicht erkannt: "2015-13"']);
+});
+
+test('update can remove a date and keeps deutschlandtreffen', () => {
+  const csv = CSV.replace('@ulm_usk,,,,,,,', '@ulm_usk,,,,,2012,2014,2020');
+  const result = applyIssue(csv, { labels: ['aktualisierung'], body: issueBody({ Stadt: 'Ulm', 'Chapter-Anerkennung': 'entfernen' }) });
+  assert.equal(rowOf(result.csv, 'Ulm'), 'Ulm,48.4011,9.9876,0,,urbansketchersulm@gmail.com,,@ulm_usk,,,,,2012,,2020');
+});
