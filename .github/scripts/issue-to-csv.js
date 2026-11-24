@@ -112,7 +112,6 @@ function parseCSVLine(line) {
  * or { error } with a message for the issue author.
  */
 function applyIssue(csvText, { body, labels }) {
-  const isNew = labels.includes('neue-stadt');
   const f = parseIssueBody(body);
   const notes = [];
   const date = (label, raw) => {
@@ -125,22 +124,27 @@ function applyIssue(csvText, { body, labels }) {
   const chapterDate = date('Chapter-Anerkennung', f.chapterDate);
 
   if (!f.city) return { error: 'Keine Stadt im Issue gefunden' };
-  if (isNew && (!f.lat || !f.lon)) return { error: 'Koordinaten fehlen' };
 
   const lines = csvText.trim().split('\n');
   const header = lines[0];
   let dataLines = lines.slice(1);
 
+  const isSameCity = line => parseCSVLine(line)[0].toLowerCase() === f.city.toLowerCase();
+  const isNew = !dataLines.some(isSameCity);
+  if (!isNew && labels.includes('neue-stadt')) {
+    notes.push(`"${f.city}" steht schon in der Liste; als Aktualisierung übernommen.`);
+  }
+
   if (isNew) {
+    if (!labels.includes('neue-stadt')) return { error: `Stadt "${f.city}" nicht gefunden` };
+    if (!f.lat || !f.lon) return { error: 'Koordinaten fehlen' };
     const newLine = [f.city, f.lat, f.lon, f.isOfficial, f.website, f.email, f.facebook, f.instagram, f.bluesky, f.whatsapp, f.cara, f.description, founded, chapterDate, ''].map(escapeCSV).join(',');
     dataLines.push(newLine);
     dataLines.sort((a, b) => parseCSVLine(a)[0].toLowerCase().localeCompare(parseCSVLine(b)[0].toLowerCase(), 'de'));
   } else {
-    let found = false;
     dataLines = dataLines.map(line => {
+      if (!isSameCity(line)) return line;
       const fields = parseCSVLine(line);
-      if (fields[0].toLowerCase() !== f.city.toLowerCase()) return line;
-      found = true;
       const updateField = (newVal, oldVal) => {
         if (newVal === 'entfernen') return '';
         return newVal || oldVal || '';
@@ -163,7 +167,6 @@ function applyIssue(csvText, { body, labels }) {
         fields[14] ?? '',
       ].map(escapeCSV).join(',');
     });
-    if (!found) return { error: `Stadt "${f.city}" nicht gefunden` };
   }
 
   return { csv: [header, ...dataLines].join('\n') + '\n', city: f.city, isNew, notes };

@@ -92,3 +92,14 @@ test('update can remove a date and keeps deutschlandtreffen', () => {
   const result = applyIssue(csv, { labels: ['aktualisierung'], body: issueBody({ Stadt: 'Ulm', 'Chapter-Anerkennung': 'entfernen' }) });
   assert.equal(rowOf(result.csv, 'Ulm'), 'Ulm,48.4011,9.9876,0,,urbansketchersulm@gmail.com,,@ulm_usk,,,,,2012,,2020');
 });
+
+test('new-city issue for a listed city updates that row instead of adding one', () => {
+  const result = applyIssue(CSV, {
+    labels: ['neue-stadt'],
+    body: issueBody({ Stadt: 'Ulm', 'Breitengrad (lat)': '48.40', 'Längengrad (lon)': '9.99', Instagram: '@usk_ulm' }),
+  });
+  assert.deepEqual(result.csv.trim().split('\n').map(l => l.split(',')[0]), ['city', 'Aachen', 'Ulm']);
+  assert.equal(rowOf(result.csv, 'Ulm'), 'Ulm,48.40,9.99,0,,urbansketchersulm@gmail.com,,@usk_ulm,,,,,,,');
+  assert.equal(result.isNew, false);
+  assert.deepEqual(result.notes, ['"Ulm" steht schon in der Liste; als Aktualisierung übernommen.']);
+});
