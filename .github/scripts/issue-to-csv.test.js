@@ -103,3 +103,11 @@ test('new-city issue for a listed city updates that row instead of adding one', 
   assert.equal(result.isNew, false);
   assert.deepEqual(result.notes, ['"Ulm" steht schon in der Liste; als Aktualisierung übernommen.']);
 });
+
+test('line breaks in the description become <br> so the row stays on one line', () => {
+  const result = applyIssue(CSV, {
+    labels: ['aktualisierung'],
+    body: issueBody({ Stadt: 'Ulm', 'Treffpunkt & Zeiten': 'Jeden Samstag.\r\n\r\nWir freuen uns!' }),
+  });
+  assert.equal(rowOf(result.csv, 'Ulm'), 'Ulm,48.4011,9.9876,0,,urbansketchersulm@gmail.com,,@ulm_usk,,,,Jeden Samstag.<br>Wir freuen uns!,,,');
+});

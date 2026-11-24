@@ -61,7 +61,7 @@ function parseIssueBody(body) {
     lon: parseField(body, 'Längengrad \\(lon\\)'),
     isOfficialRaw,
     isOfficial: isOfficialRaw === 'Ja' ? '1' : '0',
-    description: parseField(body, 'Treffpunkt & Zeiten'),
+    description: parseField(body, 'Treffpunkt & Zeiten').replace(/\s*\n\s*/g, '<br>'),
     website: parseField(body, 'Website'),
     email: parseField(body, 'E-Mail'),
     facebook: parseField(body, 'Facebook'),
